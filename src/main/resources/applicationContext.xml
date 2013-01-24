@@ -1,73 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN 2.0//EN" "http://www.springframework.org/dtd/spring-beans-2.0.dtd" [
-<!ENTITY contextInclude SYSTEM "org/springframework/web/context/WEB-INF/contextInclude.xml">
-]>
-
-<beans>
-
-	<import resource="resources/messageSource.xml" />
-
-	<import resource="/resources/../resources/themeSource.xml" />
-
-	<bean id="lifecyclePostProcessor"
-		class="org.springframework.beans.factory.LifecycleBean$PostProcessor" />
-
-	<!-- <bean name="performanceMonitor" class="org.springframework.context.support.TestListener" 
-		/> -->
-
-	<!-- <bean name="aca" class="org.springframework.context.ACATest"> </bean> 
-		<bean name="aca-prototype" class="org.springframework.context.ACATest" scope="prototype"> 
-		</bean> -->
-
-	<bean id="beanThatListens" class="org.springframework.context.BeanThatListens" />
-
-	<bean id="parentListener" class="org.springframework.context.TestListener" />
-
-	<!-- Inherited tests -->
-
-	<!-- name and age values will be overridden by myinit.properties" -->
-	<bean id="rod" class="org.springframework.beans.TestBean">
-		<property name="name">
-			<value>dummy</value>
-		</property>
-		<property name="age">
-			<value>-1</value>
-		</property>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:jee="http://www.springframework.org/schema/jee"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.1.xsd
+       http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.1.xsd">
+	<description>Spring公共配置 </description>
+	<context:property-placeholder
+		ignore-resource-not-found="true" location="classpath*:application.properties" />
+	<!-- dataSource definition -->
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="${jdbc.driver}" />
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+		<property name="defaultAutoCommit" value="false" />
 	</bean>
-
-	<!-- Tests of lifecycle callbacks -->
-	<bean id="mustBeInitialized" class="org.springframework.beans.factory.MustBeInitialized">
+	<!-- activiti集成配置 -->
+	<!-- activiti transactionManager -->
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
 	</bean>
-
-	<bean id="lifecycle" class="org.springframework.context.LifecycleContextBean"
-		init-method="declaredInitMethod">
-		<property name="initMethodDeclared">
-			<value>true</value>
-		</property>
+	<!-- activiti ProcessEngineConfiguration -->
+	<bean id="processEngineConfiguration" class="org.activiti.spring.SpringProcessEngineConfiguration">
+		<property name="dataSource" ref="dataSource" />
+		<property name="transactionManager" ref="transactionManager" />
+		<property name="databaseSchemaUpdate" value="true" />
+		<property name="jobExecutorActivate" value="true" />
+		<!-- property name="customFormTypes"> <list> <bean class="org.activiti.explorer.form.UserFormType" 
+			/> </list> </property -->
 	</bean>
-
-	&contextInclude;
-
-	<bean id="myOverride"
-		class="org.springframework.beans.factory.config.PropertyOverrideConfigurer">
-		<property name="location">
-			<value>/org/springframework/web/context/WEB-INF/myoverride.properties</value>
-		</property>
+	<bean id="processEngine" class="org.activiti.spring.ProcessEngineFactoryBean"
+		destroy-method="destroy">
+		<property name="processEngineConfiguration" ref="processEngineConfiguration" />
 	</bean>
-
-	<bean id="myPlaceholder"
-		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-		<property name="locations">
-			<list>
-				<value>classpath:/org/springframework/web/context/WEB-INF/myplace*.properties</value>
-				<value>classpath:/org/springframework/web/context/WEB-INF/myover*.properties</value>
-				<value>${myDir}/myover*.properties</value>
-			</list>
-		</property>
-	</bean>
-
-	<bean id="init-and-ib"
-		class="org.springframework.web.context.XmlWebApplicationContextTests$InitAndIB"
-		lazy-init="true" init-method="customInit" destroy-method="customDestroy" />
-
+	<bean id="repositoryService" factory-bean="processEngine"
+		factory-method="getRepositoryService" />
+	<bean id="runtimeService" factory-bean="processEngine"
+		factory-method="getRuntimeService" />
+	<bean id="taskService" factory-bean="processEngine"
+		factory-method="getTaskService" />
+	<bean id="historyService" factory-bean="processEngine"
+		factory-method="getHistoryService" />
+	<bean id="managementService" factory-bean="processEngine"
+		factory-method="getManagementService" />
+	<bean id="identityService" factory-bean="processEngine"
+		factory-method="getIdentityService" />
 </beans>
