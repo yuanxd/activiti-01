@@ -21,18 +21,15 @@ public class TestServlet extends HttpServlet {
 	private static final long serialVersionUID = 6428943667955638630L;
 
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+	protected void service(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		System.err.println("doGet");
 		WebApplicationContext wc = WebApplicationContextUtils
 				.getWebApplicationContext(req.getSession().getServletContext());
-		ProcessEngine processEngine = (ProcessEngine) wc
-				.getBean("processEngine");
-
-		RepositoryService repositoryService = (RepositoryService) wc
-				.getBean("repositoryService");
-		repositoryService.createDeployment()
-				.addClasspathResource("VacationRequest.bpmn20.xml").deploy();
+//		RepositoryService repositoryService = (RepositoryService) wc
+//				.getBean("repositoryService");
+//		repositoryService.createDeployment()
+//				.addClasspathResource("VacationRequest.bpmn20.xml").deploy();
 
 		// Starting a process instance
 		Map<String, Object> variables = new HashMap<String, Object>();
@@ -49,19 +46,6 @@ public class TestServlet extends HttpServlet {
 		System.err.println("Number of process instances: "
 				+ runtimeService.createProcessInstanceQuery().count());
 
-	}
-
-	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
-			throws ServletException, IOException {
-		doGet(req, resp);
-	}
-
-	@Override
-	protected void service(HttpServletRequest req, HttpServletResponse resp)
-			throws ServletException, IOException {
-		System.err.println("service");
-		super.service(req, resp);
 	}
 
 }

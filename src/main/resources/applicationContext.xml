@@ -29,12 +29,15 @@
 		<property name="transactionManager" ref="transactionManager" />
 		<property name="databaseSchemaUpdate" value="true" />
 		<property name="jobExecutorActivate" value="true" />
-		<!-- property name="customFormTypes"> <list> <bean class="org.activiti.explorer.form.UserFormType" 
-			/> </list> </property -->
+		<property name="deploymentResources"
+			value="classpath*:/com/xwinter/study/activiti/deployment/*.bpmn20.xml" />
 	</bean>
 	<bean id="processEngine" class="org.activiti.spring.ProcessEngineFactoryBean"
 		destroy-method="destroy">
 		<property name="processEngineConfiguration" ref="processEngineConfiguration" />
+	</bean>
+	<bean id="activitiRule" class="org.activiti.engine.test.ActivitiRule">
+		<property name="processEngine" ref="processEngine" />
 	</bean>
 	<bean id="repositoryService" factory-bean="processEngine"
 		factory-method="getRepositoryService" />
