@@ -12,7 +12,7 @@ import org.activiti.engine.TaskService;
 import org.activiti.engine.runtime.ProcessInstance;
 import org.activiti.engine.task.Task;
 
-public class TestProcessEngine {
+public class ProcessEngineTest {
 	public static void main(String[] args) {
 		ProcessEngine processEngine = ProcessEngines.getDefaultProcessEngine();
 		RepositoryService repositoryService = processEngine
