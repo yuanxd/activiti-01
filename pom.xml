@@ -80,6 +80,18 @@
 	</dependencies>
 	<build>
 		<finalName>activiti-01</finalName>
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.6</source>
+					<target>1.6</target>
+					<showDeprecation>true</showDeprecation>
+					<showWarnings>true</showWarnings>
+					<optimize>true</optimize>
+				</configuration>
+			</plugin>
+		</plugins>
 	</build>
 	<properties>
 		<!-- Servelt API -->
