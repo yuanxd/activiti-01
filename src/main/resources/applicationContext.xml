@@ -29,8 +29,12 @@
 		<property name="transactionManager" ref="transactionManager" />
 		<property name="databaseSchemaUpdate" value="true" />
 		<property name="jobExecutorActivate" value="true" />
-		<property name="deploymentResources"
-			value="classpath*:/com/xwinter/study/activiti/deployment/*.bpmn20.xml" />
+		<!-- 自动部署 -->
+		<property name="deploymentResources">
+			<list>
+				<value>classpath*:/diagrams/*</value>
+			</list>
+		</property>
 	</bean>
 	<bean id="processEngine" class="org.activiti.spring.ProcessEngineFactoryBean"
 		destroy-method="destroy">
