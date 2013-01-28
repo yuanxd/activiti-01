@@ -22,3 +22,7 @@
 # 修改履历
 *2013年1月28日:*
 spring整合activiti，安装eclipse插件activiti-designer-5.11.2
+
+# TODO
+*添加流程定义测试*
+*自定义用户权限表*
