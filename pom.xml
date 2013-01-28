@@ -91,6 +91,32 @@
 					<optimize>true</optimize>
 				</configuration>
 			</plugin>
+			<plugin>
+				<groupId>org.mortbay.jetty</groupId>
+				<artifactId>maven-jetty-plugin</artifactId>
+				<version>${jetty.version}</version>
+				<configuration>
+					<!-- 热加载扫描间隔秒数 -->
+					<scanIntervalSeconds>5</scanIntervalSeconds>
+					<stopKey>/</stopKey>
+					<stopPort>9999</stopPort>
+					<!-- 额外扫描的class路径 
+					<scanTargets>
+						<scanTarget>D:/EclipseWorkspace/myweb/myweb-dal/target/classes</scanTarget>
+						<scanTarget>D:/EclipseWorkspace/myweb/myweb-core/target/classes</scanTarget>
+					</scanTargets>
+					-->
+					<webAppConfig>
+						<contextPath>/${project.artifactId}</contextPath>
+						<!-- jetty配置文件
+						<defaultsDescriptor>src/main/resources/webdefault.xml</defaultsDescriptor>
+						 -->
+						<!-- 引用其它工程的class 
+						<extraClasspath>D:/EclipseWorkspace/myweb/myweb-core/target/classes;D:/EclipseWorkspace/myweb/myweb-dal/target/classes</extraClasspath>
+						-->
+					</webAppConfig>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 	<properties>
@@ -101,5 +127,6 @@
 		<!-- h2数据库 -->
 		<h2.version>1.3.170</h2.version>
 		<spring.version>3.1.2.RELEASE</spring.version>
+		<jetty.version>6.1.26RC0</jetty.version>
 	</properties>
 </project>
