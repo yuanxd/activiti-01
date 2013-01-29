@@ -24,5 +24,6 @@
 spring整合activiti，安装eclipse插件activiti-designer-5.11.2
 
 # TODO
+*添加transactionManager*
 *添加流程定义测试*
 *自定义用户权限表*
