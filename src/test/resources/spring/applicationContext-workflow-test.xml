@@ -39,4 +39,14 @@
 		factory-method="getManagementService" />
 	<bean id="identityService" factory-bean="processEngine"
 		factory-method="getIdentityService" />
+	<bean id="activitiRule" class="org.activiti.engine.test.ActivitiRule">
+		<property name="processEngine" ref="processEngine" />
+		<!-- -->
+		<property name="repositoryService" ref="repositoryService" />
+		<property name="runtimeService" ref="runtimeService" />
+		<property name="taskService" ref="taskService" />
+		<property name="managementService" ref="managementService" />
+		<property name="identityService" ref="identityService" />
+		 
+	</bean>
 </beans>
