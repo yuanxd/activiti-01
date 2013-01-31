@@ -41,7 +41,7 @@
 		factory-method="getIdentityService" />
 	<bean id="activitiRule" class="org.activiti.engine.test.ActivitiRule">
 		<property name="processEngine" ref="processEngine" />
-		<!-- -->
+		<!-- 当注入processEngine属性时，其他属性也需要自行注入 -->
 		<property name="repositoryService" ref="repositoryService" />
 		<property name="runtimeService" ref="runtimeService" />
 		<property name="taskService" ref="taskService" />

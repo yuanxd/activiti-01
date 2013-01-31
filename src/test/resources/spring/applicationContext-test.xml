@@ -74,8 +74,6 @@
 		</property>
 	</bean>
 	<!-- 开启注解事务 只对当前配置文件有效 -->
-	<tx:annotation-driven transaction-manager="transactionManager" />
-
 	<tx:advice id="txAdvice" transaction-manager="transactionManager">
 		<tx:attributes>
 			<tx:method name="save*" propagation="REQUIRED" />
