@@ -27,3 +27,9 @@ spring整合activiti，安装eclipse插件activiti-designer-5.11.2
 *添加transactionManager*
 *添加流程定义测试*
 *自定义用户权限表*
+
+# 参考资料
+Spring mvc：http://blog.csdn.net/sunitjy/article/details/6782431
+activiti 介绍：http://www.kafeitu.me/
+activiti 项目参考：https://github.com/henryyan/kft-activiti-demo
+REST:http://www.infoq.com/cn/articles/rest-introduction
