@@ -18,27 +18,35 @@ import com.xwinter.study.activiti.entity.Test;
 import com.xwinter.study.activiti.entity.User;
 import com.xwinter.study.activiti.service.MainService;
 
+/**
+ * 首页Controller
+ * 
+ * @author 袁晓冬
+ * 
+ */
 @Controller
-@RequestMapping(value = "/test")
-public class TestController {
+@RequestMapping(value = "/index")
+public class MainController {
 	@Autowired
 	private MainService testService;
-
-	@RequestMapping(value = "/index")
-	public String index() {
-		return "/test/index";
-	}
 
 	@RequestMapping(value = "start", method = RequestMethod.POST)
 	public String start(Test test, RedirectAttributes redirectAttributes,
 			HttpSession session) {
-		if (!StringUtils.hasLength(test.getId())) {
-			throw new AppException("please do save first!");
-		}
 		Map<String, Object> variables = new HashMap<String, Object>();
-		variables.put("approve", "leader");
+		variables.put("approveRole", "3fdf0dbd-decd-49cd-81e0-ef4e5eae2b1e");
 		testService.create(test, variables,
 				(User) session.getAttribute(Constants.SESSION_KEY));
-		return "/test/index";
+		return "/index";
+	}
+
+	/**
+	 * 首页画面
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "")
+	public String index() {
+		return "/index";
 	}
 }

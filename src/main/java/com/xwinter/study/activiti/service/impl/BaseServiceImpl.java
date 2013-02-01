@@ -1,6 +1,7 @@
 package com.xwinter.study.activiti.service.impl;
 
 import java.io.Serializable;
+import java.util.Collection;
 
 import com.xwinter.study.activiti.dao.BaseDAO;
 import com.xwinter.study.activiti.entity.BaseEntity;
@@ -16,6 +17,11 @@ public class BaseServiceImpl<E extends BaseEntity, PK extends Serializable>
 	@Override
 	public PK save(E entity) {
 		return getDAO().save(entity);
+	}
+
+	@Override
+	public void save(Collection<E> entities) {
+		getDAO().save(entities);
 	}
 
 	@Override

@@ -1,43 +1,44 @@
 package com.xwinter.study.activiti.dao;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.List;
 
 import com.xwinter.study.activiti.entity.BaseEntity;
 
 /**
- * Dao²ã¹²Í¨»ùÀà<br>
+ * Daoå±‚å…±é€šåŸºç±»<br>
  * <p>
- * ËùÓĞÊı¾İ·ÃÎÊ²ã£¨@Entity×¢½â£©¼Ì³Ğ´Ë¹²Í¨»ùÀà£¬ÊµÏÖÊı¾İ·ÃÎÊ²ãµÄ¹²Í¨´¦Àí¡£
+ * æ‰€æœ‰æ•°æ®è®¿é—®å±‚ï¼ˆ@Entityæ³¨è§£ï¼‰ç»§æ‰¿æ­¤å…±é€šåŸºç±»ï¼Œå®ç°æ•°æ®è®¿é—®å±‚çš„å…±é€šå¤„ç†ã€‚
  * 
  * @param <E>
- *            DaoËù´¦ÀíµÄEntity¶ÔÏó
+ *            Daoæ‰€å¤„ç†çš„Entityå¯¹è±¡
  * @param <PK>
- *            Entity¶ÔÏóµÄÖ÷¼üÀàĞÍ£¬Ò»°ãÊÇ{@link Long}
- * @author Ô¬Ïş¶¬
+ *            Entityå¯¹è±¡çš„ä¸»é”®ç±»å‹ï¼Œä¸€èˆ¬æ˜¯{@link Long}
+ * @author è¢æ™“å†¬
  */
 public interface BaseDAO<E extends BaseEntity, PK extends Serializable> {
-	// ¼ÇÂ¼×´Ì¬-ÓĞĞ§
+	// è®°å½•çŠ¶æ€-æœ‰æ•ˆ
 	public static final int RECORD_STATE_VALID = 1;
-	// ¼ÇÂ¼×´Ì¬-Ìá½»
+	// è®°å½•çŠ¶æ€-æäº¤
 	public static final int RECORD_STATE_SUBMIT = 5;
-	// ¼ÇÂ¼×´Ì¬-É¾³ı
+	// è®°å½•çŠ¶æ€-åˆ é™¤
 	public static final int RECORD_STATE_DELETE = 9;
 
 	/**
-	 * Çå¿Õ»º³åÇø
+	 * æ¸…ç©ºç¼“å†²åŒº
 	 */
 	public void clear();
 
 	/**
-	 * µÃµ½ËùÓĞÊµÌå¸öÊı£¬ÎŞ¹ıÂËÌõ¼ş
+	 * å¾—åˆ°æ‰€æœ‰å®ä½“ä¸ªæ•°ï¼Œæ— è¿‡æ»¤æ¡ä»¶
 	 * 
 	 * @return
 	 */
 	public int countAll();
 
 	/**
-	 * ¸ù¾İ²éÑ¯Óï¾äµÃµ½¼ÇÂ¼×ÜÊı
+	 * æ ¹æ®æŸ¥è¯¢è¯­å¥å¾—åˆ°è®°å½•æ€»æ•°
 	 * 
 	 * @param hql
 	 * @param paramlist
@@ -46,42 +47,42 @@ public interface BaseDAO<E extends BaseEntity, PK extends Serializable> {
 	public int countAll(String hql, final Object... paramlist);
 
 	/**
-	 * µÃµ½ÓĞĞ§ÊµÌå¸öÊı£¬ÎŞ¹ıÂËÌõ¼ş
+	 * å¾—åˆ°æœ‰æ•ˆå®ä½“ä¸ªæ•°ï¼Œæ— è¿‡æ»¤æ¡ä»¶
 	 * 
 	 * @return
 	 */
 	public int countValidAll();
 
 	/**
-	 * É¾³ıÊµÌå¶ÔÏó
+	 * åˆ é™¤å®ä½“å¯¹è±¡
 	 * 
 	 * @paraE entity
 	 */
 	public void delete(E entity);
 
 	/**
-	 * ¸ù¾İÖ÷¼üÉ¾³ıÊµÌå
+	 * æ ¹æ®ä¸»é”®åˆ é™¤å®ä½“
 	 * 
 	 * @param id
 	 */
 	public void delete(PK id);
 
 	/**
-	 * ÅĞ¶ÏÊÇ·ñ´æÔÚÖ÷¼üÎªidµÄÊµÌå
+	 * åˆ¤æ–­æ˜¯å¦å­˜åœ¨ä¸»é”®ä¸ºidçš„å®ä½“
 	 * 
 	 * @param id
-	 *            ÊµÌåÖ÷¼ü
-	 * @return boolean ÊÇ·ñ´æÔÚ
+	 *            å®ä½“ä¸»é”®
+	 * @return boolean æ˜¯å¦å­˜åœ¨
 	 */
 	boolean exists(PK id);
 
 	/**
-	 * Ë¢ĞÂ»º³åÇø
+	 * åˆ·æ–°ç¼“å†²åŒº
 	 */
 	public void flush();
 
 	/**
-	 * ¸ù¾İÖ÷¼ü»ñÈ¡ÊµÌå
+	 * æ ¹æ®ä¸»é”®è·å–å®ä½“
 	 * 
 	 * @param id
 	 * @return
@@ -89,144 +90,152 @@ public interface BaseDAO<E extends BaseEntity, PK extends Serializable> {
 	public E get(PK id);
 
 	/**
-	 * ¸ù¾İ²éÑ¯Óï¾äÖ´ĞĞ²éÑ¯´¦Àí£¨ÓĞ·ÖÒ³£©
+	 * æ ¹æ®æŸ¥è¯¢è¯­å¥æ‰§è¡ŒæŸ¥è¯¢å¤„ç†ï¼ˆæœ‰åˆ†é¡µï¼‰
 	 * 
 	 * @param hql
-	 *            ²éÑ¯Óï¾ä
+	 *            æŸ¥è¯¢è¯­å¥
 	 * @param pn
-	 *            Ò³Âë
+	 *            é¡µç 
 	 * @param pageSize
-	 *            Ã¿Ò³¼ÇÂ¼Êı
+	 *            æ¯é¡µè®°å½•æ•°
 	 * @param paramlist
-	 *            ²ÎÊıÁĞ±í
-	 * @return ½á¹û¼¯
+	 *            å‚æ•°åˆ—è¡¨
+	 * @return ç»“æœé›†
 	 */
 	public <T> List<T> list(final String hql, final int pn, final int pageSize,
 			final Object... paramlist);
 
 	/**
-	 * ¸ù¾İ²éÑ¯Óï¾äÖ´ĞĞ²éÑ¯´¦Àí£¨ÎŞ·ÖÒ³£©
+	 * æ ¹æ®æŸ¥è¯¢è¯­å¥æ‰§è¡ŒæŸ¥è¯¢å¤„ç†ï¼ˆæ— åˆ†é¡µï¼‰
 	 * 
 	 * @param hql
-	 *            ²éÑ¯Óï¾ä
+	 *            æŸ¥è¯¢è¯­å¥
 	 * @param paramlist
-	 *            ²ÎÊıÁĞ±í
-	 * @return ½á¹û¼¯
+	 *            å‚æ•°åˆ—è¡¨
+	 * @return ç»“æœé›†
 	 */
 	public <T> List<T> listWithParams(final String hql,
 			final Object... paramlist);
 
 	/**
-	 * µÃµ½ËùÓĞÊµÌå
+	 * å¾—åˆ°æ‰€æœ‰å®ä½“
 	 * 
 	 * @return
 	 */
 	public List<E> listAll();
 
 	/**
-	 * ¸ù¾İÒ³ÊıºÍÃ¿Ò³¼ÇÂ¼ÊıµÃµ½ËùÓĞÊµÌå
+	 * æ ¹æ®é¡µæ•°å’Œæ¯é¡µè®°å½•æ•°å¾—åˆ°æ‰€æœ‰å®ä½“
 	 * 
 	 * @param pn
-	 *            µÚ¼¸Ò³¼ÇÂ¼
+	 *            ç¬¬å‡ é¡µè®°å½•
 	 * @param pageSize
-	 *            Ã¿Ò³¼ÇÂ¼Êı
+	 *            æ¯é¡µè®°å½•æ•°
 	 * @return
 	 */
 	public List<E> listAll(int pn, int pageSize);
 
 	/**
-	 * µÃµ½ËùÓĞÓĞĞ§ÊµÌå
+	 * å¾—åˆ°æ‰€æœ‰æœ‰æ•ˆå®ä½“
 	 * 
 	 * @return
 	 */
 	public List<E> listValidAll();
 
 	/**
-	 * ¸ù¾İÒ³ÊıºÍÃ¿Ò³¼ÇÂ¼ÊıµÃµ½ËùÓĞÓĞĞ§ÊµÌå
+	 * æ ¹æ®é¡µæ•°å’Œæ¯é¡µè®°å½•æ•°å¾—åˆ°æ‰€æœ‰æœ‰æ•ˆå®ä½“
 	 * 
 	 * @param pn
-	 *            µÚ¼¸Ò³¼ÇÂ¼
+	 *            ç¬¬å‡ é¡µè®°å½•
 	 * @param pageSize
-	 *            Ã¿Ò³¼ÇÂ¼Êı
+	 *            æ¯é¡µè®°å½•æ•°
 	 * @return
 	 */
 	public List<E> listValidAll(int pn, int pageSize);
 
 	/**
-	 * ÕûºÏÊµÌå´¦Àí
+	 * æ•´åˆå®ä½“å¤„ç†
 	 * 
 	 * @paraE entity BaseEntity
 	 */
 	public void merge(E entity);
 
 	/**
-	 * Ö÷¼üĞ¡ÓÚPKµÄµÚÒ»Ò³Êı¾İ¡£Èç¹ûpk²»Ö¸¶¨ÔòÏàµ±ÓÚµ÷ÓÃlistAll({@link listAll}
+	 * ä¸»é”®å°äºPKçš„ç¬¬ä¸€é¡µæ•°æ®ã€‚å¦‚æœpkä¸æŒ‡å®šåˆ™ç›¸å½“äºè°ƒç”¨listAll({@link listAll}
 	 * 
 	 * @param pk
-	 *            Ö÷¼ü
+	 *            ä¸»é”®
 	 * @param pn
-	 *            Ò³Âë
+	 *            é¡µç 
 	 * @param pageSize
-	 *            Ã¿Ò³ÊıÁ¿
+	 *            æ¯é¡µæ•°é‡
 	 * @return
 	 */
 	public List<E> next(PK pk, int pn, int pageSize);
 
 	/**
-	 * Ö÷¼ü´óÓÚpkµÄµÚÒ»Ò³Êı¾İ£¬²¢µ¹ĞòÖØÅÄ¼ìË÷³öµÄÊı¾İ¡£Èç¹ûpk²»Ö¸¶¨ÔòÏàµ±ÓÚµ÷ÓÃlistAll({@link listAll}
+	 * ä¸»é”®å¤§äºpkçš„ç¬¬ä¸€é¡µæ•°æ®ï¼Œå¹¶å€’åºé‡æ‹æ£€ç´¢å‡ºçš„æ•°æ®ã€‚å¦‚æœpkä¸æŒ‡å®šåˆ™ç›¸å½“äºè°ƒç”¨listAll({@link listAll}
 	 * 
 	 * @param pk
-	 *            Ö÷¼ü
+	 *            ä¸»é”®
 	 * @param pn
-	 *            Ò³Âë
+	 *            é¡µç 
 	 * @param pageSize
-	 *            Ã¿Ò³ÊıÁ¿
+	 *            æ¯é¡µæ•°é‡
 	 * @return
 	 */
 	public List<E> pre(PK pk, int pn, int pageSize);
 
 	/**
-	 * ±£´æÊµÌå´¦Àí
+	 * ä¿å­˜å®ä½“å¤„ç†
 	 * 
 	 * @paraE entity BaseEntity
-	 * @return Ö÷¼ü
+	 * @return ä¸»é”®
 	 */
 	public PK save(E entity);
+	
+	/**
+	 * æ‰¹é‡ä¿å­˜å®ä½“å¤„ç†
+	 * 
+	 * @paraE Collection<E> BaseEntityé›†åˆ
+	 * @return int
+	 */
+	public void save(Collection<E> entities);
 
 	/**
-	 * ±£´æ»ò¸üĞÂÊµÌå´¦Àí
+	 * ä¿å­˜æˆ–æ›´æ–°å®ä½“å¤„ç†
 	 * 
 	 * @paraE entity BaseEntity
 	 */
 	public void saveOrUpdate(E entity);
 
 	/**
-	 * ¸üĞÂÊµÌå´¦Àí
+	 * æ›´æ–°å®ä½“å¤„ç†
 	 * 
 	 * @paraE entity BaseEntity
 	 */
 	public void update(E entity);
 
 	/**
-	 * ÉÏÒ»ÏòÏÂÒ»Ïî´¦Àí
+	 * ä¸Šä¸€å‘ä¸‹ä¸€é¡¹å¤„ç†
 	 * 
 	 * @param id
-	 *            ²åÈëĞòºÅ
+	 *            æ’å…¥åºå·
 	 * @param type
-	 *            ÀàĞÍ
-	 * @return Object ·µ»Ø¶ÔÏó
+	 *            ç±»å‹
+	 * @return Object è¿”å›å¯¹è±¡
 	 * @throws Exception
-	 *             Å×³öÒì³£
+	 *             æŠ›å‡ºå¼‚å¸¸
 	 */
 	public E getPreOrNextData(Integer id, int type, String addUser)
 			throws Exception;
 
 	/**
-	 * È¡µÃ×îºóÒ»ÌõÊı¾İ
+	 * å–å¾—æœ€åä¸€æ¡æ•°æ®
 	 * 
-	 * @return Êı¾İ¶ÔÏó
+	 * @return æ•°æ®å¯¹è±¡
 	 * @throws Exception
-	 *             Òì³£Å×³ö
+	 *             å¼‚å¸¸æŠ›å‡º
 	 */
 	public E getLastRowData(String addUser) throws Exception;
 

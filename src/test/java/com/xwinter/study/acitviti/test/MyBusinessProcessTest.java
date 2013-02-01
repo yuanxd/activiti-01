@@ -26,18 +26,48 @@ public class MyBusinessProcessTest {
 	@Test
 	@Deployment(resources = "diagrams/TestProcess.bpmn")
 	public void simpleProcessTest() {
+		String bussinessKey = "junit-" + System.currentTimeMillis();
+		String processDefinitionKey = "TestProcess";
+		/** 发起流程 */
 		ProcessInstance instance = activitiSpringRule.getRuntimeService()
-				.startProcessInstanceByKey("TestProcess");
+				.startProcessInstanceByKey(processDefinitionKey, bussinessKey);
 		assertNotNull(instance);
 		Task task = activitiSpringRule.getTaskService().createTaskQuery()
-				.processInstanceId(instance.getId()).singleResult();
+				.processInstanceBusinessKey(bussinessKey).singleResult();
 		assertNotNull(task);
-		assertEquals("�����쵼����", task.getName());
-		activitiSpringRule.getTaskService().complete(task.getId());
-		assertEquals(
-				0,
-				activitiSpringRule.getRuntimeService()
-						.createProcessInstanceQuery()
-						.processInstanceId(instance.getId()).count());
+		assertEquals("部门领导审批", task.getName());
+		/** 部门领导user2审批流程 */
+		// 部门领导查询待办
+		// 根据当前人未签收的任务
+		List<Task> unsignedTasks = activitiSpringRule.getTaskService()
+				.createTaskQuery().processDefinitionKey(processDefinitionKey)
+				.taskCandidateUser("2")
+				.processDefinitionKey(processDefinitionKey).active()
+				.orderByTaskPriority().desc().orderByTaskCreateTime().desc()
+				.list();
+		assertTrue(unsignedTasks.size() > 0);
+		// 签收
+		for (Task temp : unsignedTasks) {
+			activitiSpringRule.getTaskService().claim(temp.getId(), "2");
+		}
+		// 未签收任务为0
+		unsignedTasks = activitiSpringRule.getTaskService().createTaskQuery()
+				.processDefinitionKey(processDefinitionKey)
+				.taskCandidateUser("2")
+				.processInstanceBusinessKey(bussinessKey).active()
+				.orderByTaskPriority().desc().orderByTaskCreateTime().desc()
+				.list();
+		assertTrue(unsignedTasks.size() == 0);
+		// 已签收任务为1
+		List<Task> todoList = activitiSpringRule.getTaskService()
+				.createTaskQuery().processDefinitionKey(processDefinitionKey)
+				.taskAssignee("2").processInstanceBusinessKey(bussinessKey)
+				.active().orderByTaskPriority().desc().orderByTaskCreateTime()
+				.desc().list();
+		assertTrue(todoList.size() == 1);
+		// 完成任务
+		for (Task temp : todoList) {
+			activitiSpringRule.getTaskService().complete(temp.getId());
+		}
 	}
 }

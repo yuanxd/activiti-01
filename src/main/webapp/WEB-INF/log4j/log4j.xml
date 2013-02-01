@@ -133,7 +133,9 @@
 		<level value="DEBUG" />
 	</logger>
 	-->
-	
+	<logger name="org.activiti.engine.impl.persistence.entity.TaskEntity">
+		<level value="DEBUG" />
+	</logger>
 	<root>
 		<!-- 设置输出范围，默认只输出ERROR以上的，ERROR级别， FATAL级别的LOG -->
 		<priority value="ERROR" />

@@ -3,12 +3,11 @@ package com.xwinter.study.activiti.entity;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.Transient;
 
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
-public class Test extends BaseEntity {
+public class Department extends BaseEntity {
 
 	private String id;
 	private String name;
@@ -22,12 +21,6 @@ public class Test extends BaseEntity {
 
 	public String getName() {
 		return name;
-	}
-
-	@Override
-	@Transient
-	public String getBusinessKey() {
-		return id;
 	}
 
 	public void setId(String id) {

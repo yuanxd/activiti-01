@@ -3,6 +3,7 @@ package com.xwinter.study.activiti.dao.impl;
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -429,7 +430,12 @@ public class BaseDAOImpl<E extends BaseEntity, PK extends Serializable>
 	public PK save(E entity) {
 		return (PK) getSession().save(entity);
 	}
-
+	@Override
+	public void save(Collection<E> entities) {
+		for(E entity:entities) {
+			getSession().save(entity);
+		}
+	}
 	/**
 	 * {@inheritDoc}
 	 */
