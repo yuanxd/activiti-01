@@ -3,11 +3,13 @@ package com.xwinter.study.activiti.entity;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
+@Table(name = "T_ACTIVITI_TEST")
 public class Test extends BaseEntity {
 
 	private String id;

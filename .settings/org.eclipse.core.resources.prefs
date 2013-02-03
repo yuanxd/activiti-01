@@ -1,2 +1,3 @@
 eclipse.preferences.version=1
+encoding//src/main/resources/sql/h2/create/schema.sql=GBK
 encoding//src/main/webapp/WEB-INF/views/login.jsp=UTF-8

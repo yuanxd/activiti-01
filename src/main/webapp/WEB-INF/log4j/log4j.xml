@@ -126,13 +126,13 @@
 	<logger name="com.snpec.app">
 		<level value="DEBUG" />
 	</logger>
-	<logger name="org.hibernate.tool.hbm2ddl">
-		<level value="DEBUG" />
-	</logger>
 	<logger name="org.hibernate.transaction">
 		<level value="DEBUG" />
 	</logger>
 	-->
+	<logger name="org.hibernate.tool.hbm2ddl">
+		<level value="DEBUG" />
+	</logger>
 	<logger name="org.activiti.engine.impl.persistence.entity.TaskEntity">
 		<level value="DEBUG" />
 	</logger>
