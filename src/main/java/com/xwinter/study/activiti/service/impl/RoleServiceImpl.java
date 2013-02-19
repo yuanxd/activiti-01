@@ -19,4 +19,9 @@ public class RoleServiceImpl extends BaseServiceImpl<Role, String> implements
 		return userDao;
 	}
 
+	@Override
+	public Role getByName(String name) {
+		return userDao.getByName(name);
+	}
+
 }

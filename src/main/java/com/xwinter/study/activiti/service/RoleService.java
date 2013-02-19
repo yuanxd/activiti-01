@@ -9,4 +9,5 @@ import com.xwinter.study.activiti.entity.Role;
  * 
  */
 public interface RoleService extends BaseService<Role, String> {
+	Role getByName(String name);
 }

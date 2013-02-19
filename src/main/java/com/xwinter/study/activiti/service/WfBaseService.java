@@ -3,8 +3,8 @@ package com.xwinter.study.activiti.service;
 import java.io.Serializable;
 import java.util.Map;
 
-import com.xwinter.study.activiti.entity.BaseEntity;
 import com.xwinter.study.activiti.entity.User;
+import com.xwinter.study.activiti.entity.WfEntity;
 
 /**
  * 工作流服务基类接口<br>
@@ -13,8 +13,7 @@ import com.xwinter.study.activiti.entity.User;
  * @author 袁晓冬
  * 
  */
-public interface WfBaseService<E extends BaseEntity, PK extends Serializable>
-		extends BaseService<E, PK> {
+public interface WfBaseService<E extends WfEntity, PK extends Serializable> {
 	/**
 	 * 提交记录，发起工作流<br>
 	 * 根据业务主键、流程变量列表，发起人发起流程
@@ -56,7 +55,7 @@ public interface WfBaseService<E extends BaseEntity, PK extends Serializable>
 	 *            业务ID
 	 * @return
 	 */
-	public void complete(String businessKey, Map<String, Object> variables,
+	public void complete(E entity, Map<String, Object> variables,
 			User currentUser);
 
 	/**
@@ -66,17 +65,8 @@ public interface WfBaseService<E extends BaseEntity, PK extends Serializable>
 	 *            业务ID
 	 * @return
 	 */
-	public void inComplete(String businessKey, Map<String, Object> variables,
+	public void inComplete(E entity, Map<String, Object> variables,
 			User currentUser);
-
-	/**
-	 * 根据业务key获取业务对象
-	 * 
-	 * @param businessKey
-	 *            业务key
-	 * @return ? extends BaseEntity
-	 */
-	public BaseEntity getEntityByBusinessKey(String businessKey);
 
 	/**
 	 * processDefinitionKey key of process definition, cannot be null.

@@ -256,7 +256,7 @@
 									<classpath refid="maven.test.classpath" />
 								</sql>
  								
-								<!-- activit start 
+								<!-- activit start--> 
 								<sql driver="${jdbc.driver}" url="${jdbc.url}" userid="${jdbc.username}"
 									password="${jdbc.password}"
 									src="src/main/resources/sql/${sql.type}/drop/activiti.${sql.type}.drop.engine.sql"
@@ -270,10 +270,13 @@
 									onerror="continue">
 									<classpath refid="maven.test.classpath" />
 								</sql>
-								-->
-								<!-- not used <sql driver="${jdbc.driver}" url="${jdbc.url}" userid="${jdbc.username}" 
+								
+								<!-- not used 
+								<sql driver="${jdbc.driver}" url="${jdbc.url}" userid="${jdbc.username}" 
 									password="${jdbc.password}" src="src/main/resources/sql/${sql.type}/drop/activiti.${sql.type}.drop.identity.sql" 
-									onerror="continue"> <classpath refid="maven.test.classpath" /> </sql>
+									onerror="continue"> <classpath refid="maven.test.classpath" /> 
+								</sql>
+								-->
 								<sql driver="${jdbc.driver}" url="${jdbc.url}" userid="${jdbc.username}"
 									password="${jdbc.password}"
 									src="src/main/resources/sql/${sql.type}/create/activiti.${sql.type}.create.engine.sql"
@@ -287,7 +290,7 @@
 									onerror="continue">
 									<classpath refid="maven.test.classpath" />
 								</sql>
-								 -->
+								
 								<!-- not used <sql driver="${jdbc.driver}" url="${jdbc.url}" userid="${jdbc.username}" 
 									password="${jdbc.password}" src="src/main/resources/sql/${sql.type}/create/activiti.${sql.type}.create.identity.sql" 
 									onerror="continue"> <classpath refid="maven.test.classpath" /> </sql> -->
