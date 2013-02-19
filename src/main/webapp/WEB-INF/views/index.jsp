@@ -1,11 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+	
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <%@ include file="common/global.jsp"%>
-<title>Index</title>
 <%@ include file="common/meta.jsp"%>
+<title>Index</title>
 </head>
 <body>
 	<form:form id="inputForm" modelAttribute="user"
@@ -28,5 +30,19 @@
 			</table>
 		</fieldset>
 	</form:form>
+	<fieldset>
+		<legend>
+			<small>TestMVC</small>
+		</legend>
+		<table border="1">
+			<tr>
+				<form:form id="inputForma" action="${ctx}/mvc" method="post">
+					<td>
+						<button type="submmit">mvc</button>
+					</td>
+				</form:form>
+			</tr>
+		</table>
+	</fieldset>
 </body>
 </html>

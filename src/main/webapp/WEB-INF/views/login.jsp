@@ -6,11 +6,12 @@
 %>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<%@ include file="common/global.jsp"%>
+<%@ include file="common/meta.jsp"%>
 <title>登录</title>
 </head>
 <body>
-	<form action="<%=ctx%>/login/doLogin" method="post">
+	<form action="${ctx}/login/doLogin" method="post">
 		<table>
 			<tr>
 				<td>UserName</td>
