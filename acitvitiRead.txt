@@ -1,0 +1,38 @@
+一、服务启动
+	1、processEngineConfiguration
+		此类为服务配置类，加载配置属性
+	2、processEngine
+		使用工厂bean（org.activiti.spring.ProcessEngineFactoryBean）调用getObject()初始化ProcessEngine。
+		2.1、initializeExpressionManager初始化表达式可见bean
+		2.2、initializeTransactionExternallyManaged事务配置
+		2.3、调用processEngineConfiguration.buildProcessEngine()获取ProcessEngineImpl
+			2.3.1、initHistoryLevel()初始化历史记录级别
+			2.3.2、initVariableTypes初始化变量类型，可配置
+			2.3.3、initCommandExecutors初始化命令执行服务。初始化命令拦截器，系统默认：
+				命名执行拦截器（CommandExecutorImpl）、日志拦截器（LogInterceptor）、事务拦截器（SpringTransactionInterceptor）、命令上下文拦截器（CommandContextInterceptor，包括了流程配置信息）
+			2.3.4、初始化工作流服务类（repositoryService、taskService...)，设置拦截器链。
+			2.3.5、初始化mybatis数据库配置initSqlSessionFactory().根据不同的数据库类型设置不同参数。
+			2.3.6、初始化session factories。先初始化工作流默认sessionFactory，如new GenericManagerFactory(UserManager.class)等，需要实现org.activiti.engine.impl.interceptor.Session接口。再初始化用户自定义的sessionfactory。根据getSessionType返回值可覆盖系统默认sessionFactory。
+			2.3.7、通过processEngineConfiguration实例，初始化ProcessEngineImpl对象，并从processEngineConfiguration中获取runtimeService、taskService等服务对象。
+			2.3.8、autoDeployResources()发布流程
+二、流程启动
+	1、
+		public ProcessInstance startProcessInstanceByKey(String processDefinitionKey, String businessKey, Map<String, Object> variables) {
+			return commandExecutor.execute(new StartProcessInstanceCmd<ProcessInstance>(processDefinitionKey, null, businessKey, variables));
+		}
+		service使用命令模式，传入命令对象（StartProcessInstanceCmd）由命令执行器执行。
+	2、StartProcessInstanceCmd类根据构造函数传入的参数获取流程定义：
+		if (processDefinitionId!=null){}else if(processDefinitionKey != null) else{}
+		流程挂起时抛出异常：if (processDefinition.isSuspended())
+	3、使用流程定义创建流程实例并设置流程变量
+		ExecutionEntity processInstance = processDefinition.createProcessInstance(businessKey);
+		if (variables!=null) {
+			processInstance.setVariables(variables);
+		} 
+		3.1 ProcessDefinitionEntity.createProcessInstance(String businessKey, ActivityImpl initial)
+			根据initial参数调用父类方法创建流程对象(ExecutionEntity) super.createProcessInstance
+			
+		
+	4、启动流程实例：processInstance.start();      
+  
+  
