@@ -55,15 +55,15 @@ comment on column T_ACTIVITI_DEPARTMENT.ID is
 'UUID';
 comment on column T_ACTIVITI_DEPARTMENT.NAME is
 '组织名称';
-CREATE TABLE T_ACTIVITI_TEST 
+CREATE TABLE T_ACTIVITI_LEAVE
 (
 	ID VARCHAR(255) NOT NULL, 
 	NAME VARCHAR(255), 
-	constraint PK_T_ACTIVITI_TEST primary key (ID)
+	constraint PK_T_ACTIVITI_LEAVE primary key (ID)
 );
-comment on table T_ACTIVITI_TEST is
-'测试表';
-comment on column T_ACTIVITI_TEST.ID is
+comment on table T_ACTIVITI_LEAVE is
+'请假表';
+comment on column T_ACTIVITI_LEAVE.ID is
 'UUID';
-comment on column T_ACTIVITI_TEST.NAME is
-'测试名称';
+comment on column T_ACTIVITI_LEAVE.NAME is
+'请假名称';

@@ -10,14 +10,14 @@ import com.xwinter.study.activiti.service.impl.BaseWorkflowServiceImpl;
 import com.xwinter.study.activiti.service.index.MainService;
 
 @Component
-public class MainServiceImpl extends BaseWorkflowServiceImpl<Leave, String> implements
-		MainService {
+public class MainServiceImpl extends BaseWorkflowServiceImpl<Leave, String>
+		implements MainService {
 	@Autowired
-	private TestDAO testDao;
+	private TestDAO testDAO;
 
 	@Override
-	protected BaseDAO<Leave, String> getDAO() {
-		return testDao;
+	public BaseDAO<Leave, String> getBaseDAO() {
+		return testDAO;
 	}
 
 	@Override

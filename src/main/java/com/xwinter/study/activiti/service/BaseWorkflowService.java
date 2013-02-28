@@ -6,7 +6,6 @@ import java.util.Map;
 import org.activiti.engine.runtime.ProcessInstance;
 
 import com.xwinter.study.activiti.entity.BaseWorkflowEntity;
-import com.xwinter.study.activiti.entity.identity.User;
 
 /**
  * 工作流服务基类接口<br>
@@ -15,7 +14,8 @@ import com.xwinter.study.activiti.entity.identity.User;
  * @author 袁晓冬
  * 
  */
-public interface BaseWorkflowService<E extends BaseWorkflowEntity, PK extends Serializable> {
+public interface BaseWorkflowService<E extends BaseWorkflowEntity, PK extends Serializable>
+		extends BaseService<E, PK> {
 	/**
 	 * 提交记录，发起工作流<br>
 	 * 根据业务主键、流程变量列表，发起人发起流程
@@ -28,7 +28,7 @@ public interface BaseWorkflowService<E extends BaseWorkflowEntity, PK extends Se
 	 * @return processInstanceId
 	 */
 	public ProcessInstance create(E entity, Map<String, Object> variables,
-			User currentUser);
+			String user);
 
 	/**
 	 * processDefinitionKey key of process definition, cannot be null.

@@ -13,16 +13,16 @@ import com.xwinter.study.activiti.service.impl.BaseServiceImpl;
 public class RoleServiceImpl extends BaseServiceImpl<Role, String> implements
 		RoleService {
 	@Autowired
-	private RoleDAO userDao;
+	private RoleDAO roleDAO;
 
 	@Override
-	protected BaseDAO<Role, String> getDAO() {
-		return userDao;
+	public BaseDAO<Role, String> getBaseDAO() {
+		return roleDAO;
 	}
 
 	@Override
 	public Role getByName(String name) {
-		return userDao.getByName(name);
+		return roleDAO.getByName(name);
 	}
 
 }

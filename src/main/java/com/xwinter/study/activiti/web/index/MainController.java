@@ -42,7 +42,7 @@ public class MainController {
 		Role role = roleService.getByName("leader");
 		variables.put("approveRole", role.getId());
 		User user = (User) session.getAttribute(Constants.SESSION_KEY);
-		mainService.create(test, variables, user);
+		mainService.create(test, variables, user.getId());
 		return "/index";
 	}
 

@@ -2,6 +2,7 @@ package com.xwinter.study.activiti.service.identity;
 
 import java.util.List;
 
+import com.xwinter.study.activiti.dao.identity.UserDAO;
 import com.xwinter.study.activiti.entity.identity.Department;
 import com.xwinter.study.activiti.entity.identity.User;
 import com.xwinter.study.activiti.service.BaseService;

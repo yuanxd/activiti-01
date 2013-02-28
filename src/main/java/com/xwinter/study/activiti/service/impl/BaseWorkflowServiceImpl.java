@@ -7,8 +7,8 @@ import org.activiti.engine.runtime.ProcessInstance;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.Assert;
 
+import com.xwinter.study.activiti.dao.BaseDAO;
 import com.xwinter.study.activiti.entity.BaseWorkflowEntity;
-import com.xwinter.study.activiti.entity.identity.User;
 import com.xwinter.study.activiti.service.BaseWorkflowService;
 import com.xwinter.study.activiti.service.workflow.WorkflowService;
 
@@ -36,10 +36,10 @@ public abstract class BaseWorkflowServiceImpl<E extends BaseWorkflowEntity, PK e
 	 * @return processInstanceId
 	 */
 	public ProcessInstance create(E entity, Map<String, Object> variables,
-			User currentUser) {
+			String user) {
 		String key = getProcessDefinitionKey();
 		Assert.hasLength(key);
 		return workflowService.startProcess(getProcessDefinitionKey(),
-				entity.getBusinessKey(), variables, currentUser.getId());
+				entity.getBusinessKey(), variables, user);
 	}
 }

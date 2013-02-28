@@ -3,6 +3,7 @@ package com.xwinter.study.activiti.service;
 import java.io.Serializable;
 import java.util.Collection;
 
+import com.xwinter.study.activiti.dao.BaseDAO;
 import com.xwinter.study.activiti.entity.BaseEntity;
 
 /**

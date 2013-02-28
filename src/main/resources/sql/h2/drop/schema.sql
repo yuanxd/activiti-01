@@ -6,5 +6,5 @@ drop table T_ACTIVITI_ROLE if exists;
 drop table T_ACTIVITI_USER if exists;
 
 drop table T_ACTIVITI_USER_ROLE if exists;
-drop table T_ACTIVITI_TEST if exists;
+drop table T_ACTIVITI_LEAVE if exists;
 drop table T_ACTIVITI_DEPARTMENT if exists;
