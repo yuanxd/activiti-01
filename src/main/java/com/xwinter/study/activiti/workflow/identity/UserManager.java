@@ -10,17 +10,11 @@ import org.activiti.engine.impl.Page;
 import org.activiti.engine.impl.UserQueryImpl;
 import org.activiti.engine.impl.persistence.entity.IdentityInfoEntity;
 import org.activiti.engine.impl.persistence.entity.UserEntity;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import com.xwinter.study.activiti.service.identity.UserService;
 
 @Component
 public class UserManager extends
 		org.activiti.engine.impl.persistence.entity.UserManager {
-
-	@Autowired
-	private UserService userService;
 
 	@Override
 	public User createNewUser(String userId) {

@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.activiti.engine.runtime.ProcessInstance;
-import org.activiti.engine.task.Task;
 
 import com.xwinter.study.activiti.web.form.workflow.TaskTodoForm;
 

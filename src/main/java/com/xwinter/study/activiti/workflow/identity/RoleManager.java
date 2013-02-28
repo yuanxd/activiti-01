@@ -1,7 +1,6 @@
 package com.xwinter.study.activiti.workflow.identity;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import org.activiti.engine.ActivitiException;
@@ -14,7 +13,6 @@ import org.activiti.engine.impl.persistence.entity.GroupManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.xwinter.study.activiti.entity.identity.Role;
 import com.xwinter.study.activiti.entity.identity.User;
 import com.xwinter.study.activiti.service.identity.UserService;
 
