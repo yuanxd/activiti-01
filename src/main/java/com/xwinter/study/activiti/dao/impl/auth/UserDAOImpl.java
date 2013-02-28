@@ -15,4 +15,10 @@ public class UserDAOImpl extends BaseDAOImpl<User, String> implements UserDAO {
 		return (User) getSession().createQuery("from User where name=:name ")
 				.setParameter("name", username).uniqueResult();
 	}
+
+	@Override
+	public User getByCode(String code) {
+		return (User) getSession().createQuery("from User where code=:code ")
+				.setParameter("code", code).uniqueResult();
+	}
 }

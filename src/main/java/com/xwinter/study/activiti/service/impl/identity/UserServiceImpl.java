@@ -16,13 +16,18 @@ import com.xwinter.study.activiti.service.impl.BaseServiceImpl;
 public class UserServiceImpl extends BaseServiceImpl<User, String> implements
 		UserService {
 
+	@Autowired
+	private UserDAO userDAO;
+
 	@Override
 	public BaseDAO<User, String> getBaseDAO() {
 		return userDAO;
 	}
 
-	@Autowired
-	private UserDAO userDAO;
+	@Override
+	public User getByCode(String code) {
+		return userDAO.getByCode(code);
+	}
 
 	@Override
 	public User getByName(String username) {

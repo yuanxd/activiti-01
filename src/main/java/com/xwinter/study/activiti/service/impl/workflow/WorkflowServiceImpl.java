@@ -20,7 +20,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 
+import com.xwinter.study.activiti.common.Constants;
 import com.xwinter.study.activiti.service.workflow.WorkflowService;
+import com.xwinter.study.activiti.web.form.workflow.TaskTodoForm;
 
 /**
  * 工作流服务基类，作为工作流访问统一接口，避免了业务与工作流过多耦合<br>
@@ -123,25 +125,26 @@ public class WorkflowServiceImpl implements WorkflowService {
 		taskService.complete(task.getId(), variables);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
-	public List<Map<String, Object>> todoList(String userid) {
+	public List<TaskTodoForm> queryTodos(String userid) {
 		// 结果集
-		List<Map<String, Object>> result = new ArrayList<Map<String, Object>>();
+		List<TaskTodoForm> result = new ArrayList<TaskTodoForm>();
 		// 时间格式化
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm");
-
+		SimpleDateFormat sdf = new SimpleDateFormat(Constants.FORMAT_DATE);
 		// 已经签收的任务
 		List<Task> todoList = taskService.createTaskQuery()
 				.taskAssignee(userid).active().list();
 		for (Task task : todoList) {
 			String processDefinitionId = task.getProcessDefinitionId();
 			ProcessDefinition processDefinition = getProcessDefinition(processDefinitionId);
-
-			Map<String, Object> singleTask = packageTaskInfo(sdf, task,
+			TaskTodoForm singleTask = packageTaskInfo(sdf, task,
 					processDefinition);
-			singleTask.put("status", "todo");
+			singleTask.setStatus("todo");
+			// 设置业务key
+			ProcessInstance processInstance = runtimeService
+					.createProcessInstanceQuery()
+					.processInstanceId(task.getProcessInstanceId()).active()
+					.singleResult();
+			singleTask.setBusinessKey(processInstance.getBusinessKey());
 			result.add(singleTask);
 		}
 		// 等待签收的任务
@@ -150,10 +153,15 @@ public class WorkflowServiceImpl implements WorkflowService {
 		for (Task task : toClaimList) {
 			String processDefinitionId = task.getProcessDefinitionId();
 			ProcessDefinition processDefinition = getProcessDefinition(processDefinitionId);
-
-			Map<String, Object> singleTask = packageTaskInfo(sdf, task,
+			TaskTodoForm singleTask = packageTaskInfo(sdf, task,
 					processDefinition);
-			singleTask.put("status", "claim");
+			singleTask.setStatus("claim");
+			// 设置业务key
+			ProcessInstance processInstance = runtimeService
+					.createProcessInstanceQuery()
+					.processInstanceId(task.getProcessInstanceId()).active()
+					.singleResult();
+			singleTask.setBusinessKey(processInstance.getBusinessKey());
 			result.add(singleTask);
 		}
 
@@ -192,15 +200,16 @@ public class WorkflowServiceImpl implements WorkflowService {
 	 *            ProcessDefinition
 	 * @return
 	 */
-	private Map<String, Object> packageTaskInfo(SimpleDateFormat sdf,
-			Task task, ProcessDefinition processDefinition) {
-		Map<String, Object> singleTask = new HashMap<String, Object>();
-		singleTask.put("taskId", task.getId());
-		singleTask.put("taskName", task.getName());
-		singleTask.put("createTime", sdf.format(task.getCreateTime()));
-		singleTask.put("pdname", processDefinition.getName());
-		singleTask.put("pdversion", processDefinition.getVersion());
-		singleTask.put("pid", task.getProcessInstanceId());
-		return singleTask;
+	private TaskTodoForm packageTaskInfo(SimpleDateFormat sdf, Task task,
+			ProcessDefinition processDefinition) {
+		TaskTodoForm form = new TaskTodoForm();
+		form.setId(task.getId());
+		form.setName(task.getName());
+		form.setCreateTime(sdf.format(task.getCreateTime()));
+		form.setPdname(processDefinition.getName());
+		form.setPdversion(processDefinition.getVersion());
+		form.setPid(task.getProcessInstanceId());
+		return form;
 	}
+
 }

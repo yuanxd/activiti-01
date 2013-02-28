@@ -21,7 +21,7 @@ import com.xwinter.study.activiti.entity.BaseEntity;
 public class User extends BaseEntity {
 
 	private String id;
-
+	private String code;
 	private String name;
 
 	private String password;
@@ -29,18 +29,12 @@ public class User extends BaseEntity {
 	private String email;
 
 	private Collection<Role> roles;
-
-	@ManyToMany(targetEntity = Role.class, cascade = { CascadeType.PERSIST,
-			CascadeType.MERGE })
-	@JoinTable(name = "T_ACTIVITI_USER_ROLE", joinColumns = @JoinColumn(name = "USER_ID"), inverseJoinColumns = @JoinColumn(name = "ROLE_ID"))
-	public Collection<Role> getRoles() {
-		return roles;
+	
+	@Column(length = 40)
+	public String getCode() {
+		return code;
 	}
-
-	public void setRoles(Collection<Role> roles) {
-		this.roles = roles;
-	}
-
+	@Column(length = 40)
 	public String getEmail() {
 		return email;
 	}
@@ -63,7 +57,17 @@ public class User extends BaseEntity {
 		return password;
 	}
 
-	@Column(length = 40)
+	@ManyToMany(targetEntity = Role.class, cascade = { CascadeType.PERSIST,
+			CascadeType.MERGE })
+	@JoinTable(name = "T_ACTIVITI_USER_ROLE", joinColumns = @JoinColumn(name = "USER_ID"), inverseJoinColumns = @JoinColumn(name = "ROLE_ID"))
+	public Collection<Role> getRoles() {
+		return roles;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+
 	public void setEmail(String email) {
 		this.email = email;
 	}
@@ -78,5 +82,9 @@ public class User extends BaseEntity {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public void setRoles(Collection<Role> roles) {
+		this.roles = roles;
 	}
 }

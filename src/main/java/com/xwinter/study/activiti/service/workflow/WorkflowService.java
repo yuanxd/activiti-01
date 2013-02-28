@@ -1,8 +1,12 @@
 package com.xwinter.study.activiti.service.workflow;
 
+import java.util.List;
 import java.util.Map;
 
 import org.activiti.engine.runtime.ProcessInstance;
+import org.activiti.engine.task.Task;
+
+import com.xwinter.study.activiti.web.form.workflow.TaskTodoForm;
 
 /**
  * 工作流服务基类接口<br>
@@ -28,4 +32,6 @@ public interface WorkflowService {
 	 */
 	public ProcessInstance startProcess(String processDefinitionKey,
 			String businessKey, Map<String, Object> variables, String userid);
+
+	public List<TaskTodoForm> queryTodos(String userid);
 }

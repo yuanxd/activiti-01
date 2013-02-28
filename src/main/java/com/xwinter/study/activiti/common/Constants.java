@@ -11,4 +11,6 @@ public abstract class Constants {
 
 	public static final Pattern UNCHECKURI_PATTERN = Pattern
 			.compile(UNCHECKURI_REGEX);
+	/** 日期格式化 */
+	public static final String FORMAT_DATE = "yyyy-MM-dd hh:mm:ss";
 }

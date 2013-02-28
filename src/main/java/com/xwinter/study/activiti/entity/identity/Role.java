@@ -22,19 +22,15 @@ public class Role extends BaseEntity implements Group{
 	@Transient
 	private static final long serialVersionUID = 8846849547978767254L;
 	private String id;
+	private String code;
 	private String name;
 	private String type;
+
 	private Collection<User> users;
-
-	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE }, mappedBy = "roles", targetEntity = User.class)
-	public Collection<User> getUsers() {
-		return users;
+	@Column(length = 40)
+	public String getCode() {
+		return code;
 	}
-
-	public void setUsers(Collection<User> users) {
-		this.users = users;
-	}
-
 	@Id
 	@GenericGenerator(name = "idGenerator", strategy = "uuid2")
 	@GeneratedValue(generator = "idGenerator")
@@ -43,17 +39,9 @@ public class Role extends BaseEntity implements Group{
 		return id;
 	}
 
-	public void setId(String id) {
-		this.id = id;
-	}
-
 	@Column(length = 40)
 	public String getName() {
 		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
 	}
 
 	@Column(length = 10)
@@ -61,7 +49,28 @@ public class Role extends BaseEntity implements Group{
 		return type;
 	}
 
+	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE }, mappedBy = "roles", targetEntity = User.class)
+	public Collection<User> getUsers() {
+		return users;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
 	public void setType(String type) {
 		this.type = type;
+	}
+
+	public void setUsers(Collection<User> users) {
+		this.users = users;
 	}
 }

@@ -30,4 +30,11 @@ public interface UserService extends BaseService<User, String> {
 	 * @return
 	 */
 	public List<Department> queryDeptByUserName(String username);
+
+	/**
+	 * 根据用户编码查询用户
+	 * @param code
+	 * @return
+	 */
+	public User getByCode(String code);
 }

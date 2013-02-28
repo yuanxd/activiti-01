@@ -56,15 +56,12 @@ public class RoleManager extends GroupManager {
 		throw new ActivitiException("unsupported method");
 	}
 
-	public List<Group> findGroupsByUser(String userId) {
-		User user = userService.get(userId);
+	public List<Group> findGroupsByUser(String userCode) {
+		User user = userService.getByCode(userCode);
 		if (null == user) {
-			return null;
+			return new ArrayList<Group>();
 		}
-		Collection<Role> roles = user.getRoles();
-		List<Group> groupList = new ArrayList<Group>();
-		groupList.addAll(roles);
-		return groupList;
+		return GroupFactory.getGroupsByRoles(user.getRoles());
 	}
 
 	public List<Group> findPotentialStarterUsers(String proceDefId) {

@@ -1,7 +1,8 @@
 CREATE TABLE T_ACTIVITI_ROLE 
 (
 	ID VARCHAR(40) NOT NULL, 
-	NAME VARCHAR(40), 
+    CODE VARCHAR(40), 
+    NAME VARCHAR(40), 
 	TYPE VARCHAR(10), 
 	constraint PK_T_ACTIVITI_ROLE primary key (ID)
 );
@@ -10,6 +11,8 @@ comment on table T_ACTIVITI_ROLE is
 '业务角色';
 comment on column T_ACTIVITI_ROLE.ID is
 'UUID';
+comment on column T_ACTIVITI_ROLE.CODE is
+'角色编码';
 comment on column T_ACTIVITI_ROLE.NAME is
 '角色名称';
 comment on column T_ACTIVITI_ROLE.TYPE is
@@ -19,7 +22,8 @@ CREATE TABLE T_ACTIVITI_USER
 (
 	ID VARCHAR(40) NOT NULL, 
 	EMAIL VARCHAR(255), 
-	NAME VARCHAR(40), 
+    CODE VARCHAR(40), 
+    NAME VARCHAR(40), 
 	PASSWORD VARCHAR(40), 
 	constraint PK_T_ACTIVITI_USER primary key (ID)
 );
@@ -28,6 +32,8 @@ comment on table T_ACTIVITI_USER is
 '业务用户';
 comment on column T_ACTIVITI_USER.EMAIL is
 '邮箱';
+comment on column T_ACTIVITI_USER.CODE is
+'用户编码';
 comment on column T_ACTIVITI_USER.NAME is
 '用户名称';
 comment on column T_ACTIVITI_USER.PASSWORD is
