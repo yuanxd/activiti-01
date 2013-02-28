@@ -2,7 +2,7 @@ package com.xwinter.study.activiti.common;
 
 import javax.servlet.http.HttpSession;
 
-import com.xwinter.study.activiti.entity.User;
+import com.xwinter.study.activiti.entity.identity.User;
 
 
 public class Utils {

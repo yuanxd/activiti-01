@@ -3,13 +3,14 @@ package com.xwinter.study.activiti.service.impl;
 import java.io.Serializable;
 import java.util.Map;
 
+import org.activiti.engine.runtime.ProcessInstance;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.Assert;
 
 import com.xwinter.study.activiti.entity.BaseEntity;
-import com.xwinter.study.activiti.entity.User;
+import com.xwinter.study.activiti.entity.identity.User;
 import com.xwinter.study.activiti.service.WfBaseService;
-import com.xwinter.study.activiti.workflow.WorkflowService;
+import com.xwinter.study.activiti.service.wf.WorkflowService;
 
 /**
  * 工作流服务基类<br>
@@ -34,24 +35,13 @@ public abstract class WfBaseServiceImpl<E extends BaseEntity, PK extends Seriali
 	 *            the variables to pass, can be null.
 	 * @return processInstanceId
 	 */
-	public String create(E entity, Map<String, Object> variables,
+	public ProcessInstance create(E entity, Map<String, Object> variables,
 			User currentUser) {
 		String key = getProcessDefinitionKey();
 		Assert.hasLength(key);
-		inCreate(entity, variables, currentUser);
-		return workflowService.create(entity.getBusinessKey(), variables,
-				currentUser.getId(), getProcessDefinitionKey());
+		return workflowService.startProcess(getProcessDefinitionKey(),
+				entity.getBusinessKey(), variables, currentUser.getId());
 	}
-
-	/**
-	 * do nothing default<br>
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void inCreate(E entity, Map<String, Object> variables,
-			User currentUser) {
-	}
-
 	/**
 	 * 工作流-签收 {@inheritDoc}
 	 */
@@ -68,9 +58,9 @@ public abstract class WfBaseServiceImpl<E extends BaseEntity, PK extends Seriali
 	 */
 	public void complete(E entity, Map<String, Object> variables,
 			User currentUser) {
-		inComplete(entity,variables,currentUser);
-		workflowService.complete(entity.getBusinessKey(), variables, currentUser.getId(),
-				getProcessDefinitionKey());
+		inComplete(entity, variables, currentUser);
+		workflowService.complete(entity.getBusinessKey(), variables,
+				currentUser.getId(), getProcessDefinitionKey());
 	}
 
 	/**

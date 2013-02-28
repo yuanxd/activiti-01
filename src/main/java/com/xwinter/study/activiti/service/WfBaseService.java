@@ -3,8 +3,10 @@ package com.xwinter.study.activiti.service;
 import java.io.Serializable;
 import java.util.Map;
 
-import com.xwinter.study.activiti.entity.User;
+import org.activiti.engine.runtime.ProcessInstance;
+
 import com.xwinter.study.activiti.entity.WfEntity;
+import com.xwinter.study.activiti.entity.identity.User;
 
 /**
  * 工作流服务基类接口<br>
@@ -25,19 +27,7 @@ public interface WfBaseService<E extends WfEntity, PK extends Serializable> {
 	 *            the variables to pass, can be null.
 	 * @return processInstanceId
 	 */
-	public String create(E entity, Map<String, Object> variables,
-			User currentUser);
-
-	/**
-	 * 当调用发起工作流时在此方法内执行业务处理<br>
-	 * 如业务数据状态更新.
-	 * 
-	 * @param businessKey
-	 *            业务数据key
-	 * @param variables
-	 *            流程变量
-	 */
-	public void inCreate(E entity, Map<String, Object> variables,
+	public ProcessInstance create(E entity, Map<String, Object> variables,
 			User currentUser);
 
 	/**

@@ -34,5 +34,11 @@
             
         
     4、启动流程实例：processInstance.start();      
-  
+三、sql执行
+    通过service创建查询对象，如taskService.createTaskQuery()返回TaskQuery对象，TaskQuery对象中设置了查询参数，
+    穿过一系列拦截器，最后由CommandExecutor拦截器执行TaskQuery的execute方法进行查询。
+    调用commandContext.getTaskManager()获取查询对象，并调用对象的对应方法（findTasksByQueryCriteria）查询，mybaits根据传入的查询主键（selectTaskByQueryCriteria）
+    找到对应的查询语句，根据TaskQuery对象设置查询条件，执行查询返回查询结果。
+    
+    
   

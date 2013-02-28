@@ -242,55 +242,57 @@
 								<property name="dbunit.datatype" value="org.dbunit.ext.h2.H2DataTypeFactory" />
 								<taskdef name="dbunit" classname="org.dbunit.ant.DbUnitTask"
 									classpathref="maven.test.classpath" />
-								<!-- base -->
+								<!-- business table drop -->
 								<sql driver="${jdbc.driver}" url="${jdbc.url}" userid="${jdbc.username}"
 									password="${jdbc.password}" src="src/main/resources/sql/${sql.type}/drop/schema.sql"
 									onerror="continue">
 									<classpath refid="maven.test.classpath" />
 								</sql>
-								 
-								<!-- -->
+
+								<!-- business table create -->
 								<sql driver="${jdbc.driver}" url="${jdbc.url}" userid="${jdbc.username}"
 									password="${jdbc.password}" src="src/main/resources/sql/${sql.type}/create/schema.sql"
 									onerror="continue">
 									<classpath refid="maven.test.classpath" />
 								</sql>
- 								
-								<!-- activit start--> 
+
+								<!-- activit engine table drop -->
 								<sql driver="${jdbc.driver}" url="${jdbc.url}" userid="${jdbc.username}"
 									password="${jdbc.password}"
 									src="src/main/resources/sql/${sql.type}/drop/activiti.${sql.type}.drop.engine.sql"
 									onerror="continue">
 									<classpath refid="maven.test.classpath" />
 								</sql>
-
+								<!-- activit history table drop -->
 								<sql driver="${jdbc.driver}" url="${jdbc.url}" userid="${jdbc.username}"
 									password="${jdbc.password}"
 									src="src/main/resources/sql/${sql.type}/drop/activiti.${sql.type}.drop.history.sql"
 									onerror="continue">
 									<classpath refid="maven.test.classpath" />
 								</sql>
-								
-								<!-- not used 
-								<sql driver="${jdbc.driver}" url="${jdbc.url}" userid="${jdbc.username}" 
-									password="${jdbc.password}" src="src/main/resources/sql/${sql.type}/drop/activiti.${sql.type}.drop.identity.sql" 
-									onerror="continue"> <classpath refid="maven.test.classpath" /> 
+                                <!-- activit identity table drop 
+								<sql driver="${jdbc.driver}" url="${jdbc.url}" userid="${jdbc.username}"
+									password="${jdbc.password}"
+									src="src/main/resources/sql/${sql.type}/drop/activiti.${sql.type}.drop.identity.sql"
+									onerror="continue">
+									<classpath refid="maven.test.classpath" />
 								</sql>
 								-->
+								<!-- activit engine table create -->
 								<sql driver="${jdbc.driver}" url="${jdbc.url}" userid="${jdbc.username}"
 									password="${jdbc.password}"
 									src="src/main/resources/sql/${sql.type}/create/activiti.${sql.type}.create.engine.sql"
 									onerror="continue">
 									<classpath refid="maven.test.classpath" />
 								</sql>
-
+                                <!-- activit history table create -->
 								<sql driver="${jdbc.driver}" url="${jdbc.url}" userid="${jdbc.username}"
 									password="${jdbc.password}"
 									src="src/main/resources/sql/${sql.type}/create/activiti.${sql.type}.create.history.sql"
 									onerror="continue">
 									<classpath refid="maven.test.classpath" />
 								</sql>
-								
+
 								<!-- not used <sql driver="${jdbc.driver}" url="${jdbc.url}" userid="${jdbc.username}" 
 									password="${jdbc.password}" src="src/main/resources/sql/${sql.type}/create/activiti.${sql.type}.create.identity.sql" 
 									onerror="continue"> <classpath refid="maven.test.classpath" /> </sql> -->
