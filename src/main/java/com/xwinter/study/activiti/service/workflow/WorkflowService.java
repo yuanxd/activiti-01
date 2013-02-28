@@ -32,5 +32,32 @@ public interface WorkflowService {
 	public ProcessInstance startProcess(String processDefinitionKey,
 			String businessKey, Map<String, Object> variables, String userid);
 
+	/**
+	 * 根据用户标识查询用户待办任务
+	 * 
+	 * @param userid
+	 *            用户标识
+	 * @return
+	 */
 	public List<TaskTodoForm> queryTodos(String userid);
+
+	/**
+	 * 根据业务key签收流程
+	 * 
+	 * @param businessKey
+	 *            业务key
+	 * @param userId
+	 *            任务处理人
+	 */
+	public void claim(String businessKey, String userId);
+
+	/**
+	 * 根据业务KEY完成工作流
+	 * 
+	 * @param taskId
+	 *            任务ID
+	 * @param variables
+	 *            流程变量
+	 */
+	public void complete(String taskId, Map<String, Object> variables);
 }

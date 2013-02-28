@@ -26,6 +26,23 @@ public class LeaveProcessTest {
 	@Autowired
 	private ProcessJunitHelper helper;
 
+	@Test
+	public void testAll() {
+		// 启动流程
+		Leave leave = new Leave();
+		leave.setName("yxd test leave");
+		leaveService.create(leave, null, "yxd");
+		String businessKey = leave.getId();
+		// 待办验证
+		TaskTodoForm form = helper.getTaskByUserAndBusinessKey("leader",
+				businessKey);
+		Assert.assertNotNull(form);
+		Assert.assertTaskNotClaimed(form);
+		workflowService.claim(businessKey, "leader");
+		form = helper.getTaskByUserAndBusinessKey("leader", businessKey);
+		Assert.assertTaskClaimed(form);
+	}
+
 	@Deployment
 	@Test
 	public void testCreate() {
@@ -39,7 +56,11 @@ public class LeaveProcessTest {
 				businessKey);
 		Assert.assertNotNull(form);
 		Assert.assertTaskNotClaimed(form);
-		
+	}
+
+	@Test
+	public void testClaim() {
+		workflowService.claim("6aad69cf-5be1-472e-b584-9b9aa4e3656a", "yxd");
 	}
 
 	@Test
@@ -49,4 +70,8 @@ public class LeaveProcessTest {
 		System.err.println(formList.size());
 	}
 
+	@Test
+	public void testComplete() {
+		workflowService.complete("105", null);
+	}
 }

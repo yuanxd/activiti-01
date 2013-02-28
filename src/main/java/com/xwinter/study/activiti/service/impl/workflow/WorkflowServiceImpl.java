@@ -212,4 +212,24 @@ public class WorkflowServiceImpl implements WorkflowService {
 		return form;
 	}
 
+	@Override
+	public void claim(String taskId, String userId) {
+		taskService.setAssignee(taskId, userId);
+	}
+
+	/**
+	 * 根据任务ID获取任务对象
+	 * 
+	 * @param taskId
+	 * @return
+	 */
+	private Task getTaskByTaskId(String taskId) {
+		return taskService.createTaskQuery().taskId(taskId).singleResult();
+	}
+
+	@Override
+	public void complete(String taskId, Map<String, Object> variables) {
+		taskService.complete(taskId, variables);
+	}
+
 }
