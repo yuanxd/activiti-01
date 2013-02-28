@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.xwinter.study.activiti.common.Utils;
 import com.xwinter.study.activiti.entity.identity.User;
-import com.xwinter.study.activiti.service.wf.WorkflowService;
+import com.xwinter.study.activiti.service.workflow.WorkflowService;
 
 /**
  * 流程管理控制器<br>
@@ -27,20 +27,4 @@ public class WorkflowController {
 
 	@Autowired
 	private WorkflowService workflowService;
-
-	/**
-	 * 待办任务查询
-	 * 
-	 * @param session
-	 *            HttpSession
-	 * @return List<Map<String, Object>> 以map方式存放待办列表数据
-	 * @throws Exception
-	 */
-	@RequestMapping(value = "/task/todo/list")
-	@ResponseBody
-	public List<Map<String, Object>> todoList(HttpSession session) {
-		// 从session中获取当前登录用户
-		User user = Utils.getUserFromSession(session);
-		return workflowService.todoList(user.getId());
-	}
 }

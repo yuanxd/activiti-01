@@ -1,4 +1,4 @@
-package com.xwinter.study.activiti.service.impl.wf;
+package com.xwinter.study.activiti.service.impl.workflow;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -20,7 +20,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 
-import com.xwinter.study.activiti.service.wf.WorkflowService;
+import com.xwinter.study.activiti.service.workflow.WorkflowService;
 
 /**
  * 工作流服务基类，作为工作流访问统一接口，避免了业务与工作流过多耦合<br>
@@ -80,7 +80,6 @@ public class WorkflowServiceImpl implements WorkflowService {
 	/**
 	 * {@inheritDoc}
 	 */
-	@Override
 	public void claim(String businessKey, String userid,
 			String processDefinitionKey) {
 		if (!StringUtils.hasLength(userid)) {
@@ -104,7 +103,6 @@ public class WorkflowServiceImpl implements WorkflowService {
 	/**
 	 * {@inheritDoc}
 	 */
-	@Override
 	public void complete(String businessKey, Map<String, Object> variables,
 			String userid, String processDefinitionKey) {
 		if (!StringUtils.hasLength(userid)) {
@@ -128,7 +126,6 @@ public class WorkflowServiceImpl implements WorkflowService {
 	/**
 	 * {@inheritDoc}
 	 */
-	@Override
 	public List<Map<String, Object>> todoList(String userid) {
 		// 结果集
 		List<Map<String, Object>> result = new ArrayList<Map<String, Object>>();

@@ -7,8 +7,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.xwinter.study.activiti.service.wf.WorkflowService;
+import com.xwinter.study.activiti.service.workflow.WorkflowService;
 
+/**
+ * 流程测试类<br>
+ * 通过WorkflowService接口执行流程流转
+ * 
+ * @author 袁晓冬
+ * 
+ */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration({ "classpath:springtest/applicationContext*.xml" })
 public class ProcessTest {
@@ -16,9 +23,12 @@ public class ProcessTest {
 	@Autowired
 	protected WorkflowService workflowService;
 
+	/**
+	 * 请假流程测试
+	 */
 	@Test
 	@Deployment
-	public void simpleProcessTest() {
-		workflowService.startProcess("leaveProcess", "test", null, "yxd");
+	public void leaveProcessTest() {
+		workflowService.startProcess("leaveProcess", "test2", null, "yxd");
 	}
 }

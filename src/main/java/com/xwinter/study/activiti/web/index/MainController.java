@@ -13,7 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.xwinter.study.activiti.common.Constants;
-import com.xwinter.study.activiti.entity.Test;
+import com.xwinter.study.activiti.entity.Leave;
 import com.xwinter.study.activiti.entity.identity.Role;
 import com.xwinter.study.activiti.entity.identity.User;
 import com.xwinter.study.activiti.service.identity.RoleService;
@@ -36,7 +36,7 @@ public class MainController {
 	private MainService mainService;
 
 	@RequestMapping(value = "start", method = RequestMethod.POST)
-	public String start(Test test, RedirectAttributes redirectAttributes,
+	public String start(Leave test, RedirectAttributes redirectAttributes,
 			HttpSession session) {
 		Map<String, Object> variables = new HashMap<String, Object>();
 		Role role = roleService.getByName("leader");

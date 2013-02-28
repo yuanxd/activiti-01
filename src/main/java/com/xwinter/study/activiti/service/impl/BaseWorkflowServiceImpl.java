@@ -7,10 +7,10 @@ import org.activiti.engine.runtime.ProcessInstance;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.Assert;
 
-import com.xwinter.study.activiti.entity.BaseEntity;
+import com.xwinter.study.activiti.entity.BaseWorkflowEntity;
 import com.xwinter.study.activiti.entity.identity.User;
-import com.xwinter.study.activiti.service.WfBaseService;
-import com.xwinter.study.activiti.service.wf.WorkflowService;
+import com.xwinter.study.activiti.service.BaseWorkflowService;
+import com.xwinter.study.activiti.service.workflow.WorkflowService;
 
 /**
  * 工作流服务基类<br>
@@ -20,8 +20,8 @@ import com.xwinter.study.activiti.service.wf.WorkflowService;
  * @author 袁晓冬
  * 
  */
-public abstract class WfBaseServiceImpl<E extends BaseEntity, PK extends Serializable>
-		extends BaseServiceImpl<E, PK> implements WfBaseService<E, PK> {
+public abstract class BaseWorkflowServiceImpl<E extends BaseWorkflowEntity, PK extends Serializable>
+		extends BaseServiceImpl<E, PK> implements BaseWorkflowService<E, PK> {
 	@Autowired
 	protected WorkflowService workflowService;
 
@@ -41,34 +41,5 @@ public abstract class WfBaseServiceImpl<E extends BaseEntity, PK extends Seriali
 		Assert.hasLength(key);
 		return workflowService.startProcess(getProcessDefinitionKey(),
 				entity.getBusinessKey(), variables, currentUser.getId());
-	}
-	/**
-	 * 工作流-签收 {@inheritDoc}
-	 */
-	public void claim(String businessKey, User currentUser) {
-		workflowService.claim(businessKey, currentUser.getId(),
-				getProcessDefinitionKey());
-	}
-
-	/**
-	 * 完成任务
-	 * 
-	 * @param businessKey
-	 *            业务ID
-	 */
-	public void complete(E entity, Map<String, Object> variables,
-			User currentUser) {
-		inComplete(entity, variables, currentUser);
-		workflowService.complete(entity.getBusinessKey(), variables,
-				currentUser.getId(), getProcessDefinitionKey());
-	}
-
-	/**
-	 * do nothing default<br>
-	 */
-	@Override
-	public void inComplete(E entity, Map<String, Object> variables,
-			User currentUser) {
-
 	}
 }

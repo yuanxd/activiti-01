@@ -9,8 +9,8 @@ import javax.persistence.Transient;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
-@Table(name = "T_ACTIVITI_TEST")
-public class Test extends BaseEntity {
+@Table(name = "T_ACTIVITI_LEAVE")
+public class Leave extends BaseWorkflowEntity {
 
 	private String id;
 	private String name;

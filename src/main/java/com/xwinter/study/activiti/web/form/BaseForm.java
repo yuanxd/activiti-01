@@ -1,4 +1,4 @@
-package com.xwinter.study.activiti.form;
+package com.xwinter.study.activiti.web.form;
 
 /**
  * 表单基类
