@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.activiti.engine.identity.Group;
 import org.hibernate.annotations.GenericGenerator;
@@ -18,6 +19,8 @@ import com.xwinter.study.activiti.entity.BaseEntity;
 @Entity
 @Table(name = "T_ACTIVITI_ROLE")
 public class Role extends BaseEntity implements Group{
+	@Transient
+	private static final long serialVersionUID = 8846849547978767254L;
 	private String id;
 	private String name;
 	private String type;

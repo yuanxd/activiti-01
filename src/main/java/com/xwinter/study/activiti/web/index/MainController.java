@@ -53,7 +53,7 @@ public class MainController {
 	 */
 	@RequestMapping(value = "")
 	public ModelAndView index(HttpSession session) {
-		User user = (User) session.getAttribute(Constants.SESSION_KEY);
+//		User user = (User) session.getAttribute(Constants.SESSION_KEY);
 		ModelAndView mav = new ModelAndView("/index");
 		// List<Leave> results = workflowService.findTodoTasks(userId);
 		// mav.addObject("leaves", results);

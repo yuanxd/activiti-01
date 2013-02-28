@@ -7,7 +7,6 @@ import org.activiti.engine.runtime.ProcessInstance;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.Assert;
 
-import com.xwinter.study.activiti.dao.BaseDAO;
 import com.xwinter.study.activiti.entity.BaseWorkflowEntity;
 import com.xwinter.study.activiti.service.BaseWorkflowService;
 import com.xwinter.study.activiti.service.workflow.WorkflowService;

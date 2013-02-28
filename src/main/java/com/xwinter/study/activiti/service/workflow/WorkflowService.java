@@ -1,6 +1,5 @@
 package com.xwinter.study.activiti.service.workflow;
 
-import java.util.List;
 import java.util.Map;
 
 import org.activiti.engine.runtime.ProcessInstance;
