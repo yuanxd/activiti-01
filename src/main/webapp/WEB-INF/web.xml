@@ -33,7 +33,7 @@
 	<!-- login filter -->
 	<filter>
 		<filter-name>LoginFilter</filter-name>
-		<filter-class>com.xwinter.study.activiti.web.LoginFilter</filter-class>
+		<filter-class>com.xwinter.study.activiti.common.LoginFilter</filter-class>
 	</filter>
 	<filter-mapping>
 		<filter-name>LoginFilter</filter-name>

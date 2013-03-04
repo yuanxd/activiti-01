@@ -18,7 +18,7 @@ import com.xwinter.study.activiti.service.leave.LeaveService;
  * @author 袁晓冬
  * 
  */
-@Service
+@Service("leaveService")
 public class LeaveServiceImpl extends BaseWorkflowServiceImpl<Leave, String>
 		implements LeaveService {
 	@Autowired

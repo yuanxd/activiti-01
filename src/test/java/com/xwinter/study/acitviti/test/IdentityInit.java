@@ -34,19 +34,39 @@ public class IdentityInit {
 		leaderRole.setName("领导");
 		roleService.save(leaderRole);
 
+		Role role1 = new Role();
+		role1.setCode("role1");
+		role1.setName("角色1");
+		roleService.save(role1);
+
+		Role role2 = new Role();
+		role2.setCode("role2");
+		role2.setName("角色2");
+		roleService.save(role2);
+
+		Role role3 = new Role();
+		role3.setCode("role3");
+		role3.setName("角色3");
+		roleService.save(role3);
+
 		User yxd = new User();
 		yxd.setCode("yxd");
+		yxd.setPassword("yxd");
 		yxd.setName("袁晓冬");
 		List<Role> yxdRoleList = new ArrayList<Role>();
 		yxdRoleList.add(pgRole);
+		yxdRoleList.add(role1);
 		yxd.setRoles(yxdRoleList);
 		userService.save(yxd);
 
 		User leader = new User();
 		leader.setCode("leader");
 		leader.setName("领导A");
+		leader.setPassword("leader");
 		List<Role> leaderRoleList = new ArrayList<Role>();
 		leaderRoleList.add(leaderRole);
+		leaderRoleList.add(role2);
+		leaderRoleList.add(role3);
 		leader.setRoles(leaderRoleList);
 		userService.save(leader);
 

@@ -3,6 +3,7 @@ package com.xwinter.study.activiti.service.impl;
 import java.io.Serializable;
 import java.util.Map;
 
+import org.activiti.engine.impl.pvm.delegate.ActivityExecution;
 import org.activiti.engine.runtime.ProcessInstance;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.Assert;
@@ -40,5 +41,10 @@ public abstract class BaseWorkflowServiceImpl<E extends BaseWorkflowEntity, PK e
 		Assert.hasLength(key);
 		return workflowService.startProcess(getProcessDefinitionKey(),
 				entity.getBusinessKey(), variables, user);
+	}
+
+	@Override
+	public Boolean canComplete(ActivityExecution execution) {
+		return false;
 	}
 }

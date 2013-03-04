@@ -114,7 +114,7 @@ public class LoginController {
 	 */
 	@RequestMapping(value = "/doLogin")
 	public String doLogin(User userTemp, HttpSession session) {
-		User user = userService.getByName(userTemp.getName());
+		User user = userService.getByCode(userTemp.getCode());
 		if (null != user) {
 			if (user.getPassword().equals(userTemp.getPassword())) {
 				session.setAttribute(Constants.SESSION_KEY, user);

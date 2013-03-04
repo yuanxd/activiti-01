@@ -3,6 +3,7 @@ package com.xwinter.study.activiti.service;
 import java.io.Serializable;
 import java.util.Map;
 
+import org.activiti.engine.impl.pvm.delegate.ActivityExecution;
 import org.activiti.engine.runtime.ProcessInstance;
 
 import com.xwinter.study.activiti.entity.BaseWorkflowEntity;
@@ -36,5 +37,17 @@ public interface BaseWorkflowService<E extends BaseWorkflowEntity, PK extends Se
 	 * @return processDefinitionKey
 	 */
 	public String getProcessDefinitionKey();
+
+	/**
+	 * 会签时判断流程是否可以完成
+	 * 
+	 * @param execution
+	 * @param nrOfInstances
+	 * @param nrOfActiveInstances
+	 * @param nrOfCompletedInstances
+	 * @param loopCounter
+	 * @return
+	 */
+	public Boolean canComplete(ActivityExecution execution);
 
 }

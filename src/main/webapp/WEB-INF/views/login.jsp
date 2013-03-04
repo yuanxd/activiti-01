@@ -15,7 +15,7 @@
 		<table>
 			<tr>
 				<td>UserName</td>
-				<td><input type="text" id="name" name="name" /></td>
+				<td><input type="text" id="code" name="code" /></td>
 			</tr>
 			<tr>
 				<td>Password</td>

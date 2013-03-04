@@ -8,6 +8,8 @@
 <%@ include file="common/global.jsp"%>
 <%@ include file="common/meta.jsp"%>
 <title>Index</title>
+<script src="${ctx }/javascript/common/jquery-1.9.1.js" type="text/javascript"></script>
+<script src="${ctx }/javascript/index.js" type="text/javascript"></script>
 </head>
 <body>
 	<form:form id="inputForm" modelAttribute="user"
@@ -24,7 +26,7 @@
 				<tr>
 					<td>&nbsp;</td>
 					<td>
-						<button type="submmit">申请</button>
+					   <a id="apply" href="#">申请</a>
 					</td>
 				</tr>
 			</table>

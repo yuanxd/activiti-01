@@ -1,17 +1,8 @@
 package com.xwinter.study.activiti.web.workflow;
 
-import java.util.List;
-import java.util.Map;
-
-import javax.servlet.http.HttpSession;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.xwinter.study.activiti.common.Utils;
-import com.xwinter.study.activiti.entity.identity.User;
 import com.xwinter.study.activiti.service.workflow.WorkflowService;
 
 /**
@@ -25,6 +16,6 @@ import com.xwinter.study.activiti.service.workflow.WorkflowService;
 @RequestMapping(value = "/workflow")
 public class WorkflowController {
 
-	@Autowired
-	private WorkflowService workflowService;
+//	@Autowired
+//	private WorkflowService workflowService;
 }
