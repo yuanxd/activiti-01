@@ -39,3 +39,5 @@ activiti ½éÉÜ£ºhttp://www.kafeitu.me/
 activiti ÏîÄ¿²Î¿¼£ºhttps://github.com/henryyan/kft-activiti-demo
 
 REST:http://www.infoq.com/cn/articles/rest-introduction
+
+EasyUI:http://www.jeasyui.com/documentation/

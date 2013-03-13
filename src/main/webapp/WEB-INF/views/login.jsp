@@ -9,23 +9,35 @@
 <%@ include file="common/global.jsp"%>
 <%@ include file="common/meta.jsp"%>
 <title>登录</title>
+<script type="text/javascript">
+	$(function() {
+		$('#loginDiv').dialog({
+			title : 'login',
+			closed: false, 
+			 cache: false, 
+			modal : true
+		});
+	});
+</script>
 </head>
 <body>
-	<form action="${ctx}/login/doLogin" method="post">
-		<table>
-			<tr>
-				<td>UserName</td>
-				<td><input type="text" id="code" name="code" /></td>
-			</tr>
-			<tr>
-				<td>Password</td>
-				<td><input type="password" id="password" name="password" /></td>
-			</tr>
-			<tr>
-				<td />
-				<td><input type="submit" value="login" /></td>
-			</tr>
-		</table>
-	</form>
+	<div id="loginDiv">
+		<form action="${ctx}/login/doLogin" method="post">
+			<table>
+				<tr>
+					<td>UserName</td>
+					<td><input type="text" id="code" name="code" /></td>
+				</tr>
+				<tr>
+					<td>Password</td>
+					<td><input type="password" id="password" name="password" /></td>
+				</tr>
+				<tr>
+					<td />
+					<td><input type="submit" value="login" /></td>
+				</tr>
+			</table>
+		</form>
+	</div>
 </body>
 </html>
