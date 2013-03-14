@@ -7,7 +7,7 @@ public abstract class Constants {
 	/**
 	 * 不判断Session的URI的正则表达式
 	 */
-	private static final String UNCHECKURI_REGEX = "(.*/login.*)|(.*/*.js)|(.*/*.css)|(.*/*.jpg)|(.*/*.gif)";
+	private static final String UNCHECKURI_REGEX = "(.*/login.*)|(.*/*.js)|(.*/*.css)|(.*/*.jpg)|(.*/*.gif)|(.*/*.png)";
 
 	public static final Pattern UNCHECKURI_PATTERN = Pattern
 			.compile(UNCHECKURI_REGEX);

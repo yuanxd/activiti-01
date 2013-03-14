@@ -7,4 +7,3 @@
 <script type="text/javascript" src="${ctx}/javascript/easyui/jquery.easyui.min.js"></script>
 <link href="${ctx}/javascript/easyui/themes/default/easyui.css" rel="stylesheet" type="text/css"/>
 <link href="${ctx}/javascript/easyui/themes/icon.css" rel="stylesheet" type="text/css"/>
-<link href="${ctx}/javascript/easyui/themes/icon.css" rel="stylesheet" type="text/css"/>

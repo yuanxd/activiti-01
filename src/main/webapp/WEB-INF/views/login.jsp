@@ -13,16 +13,35 @@
 	$(function() {
 		$('#loginDiv').dialog({
 			title : 'login',
-			closed: false, 
-			 cache: false, 
-			modal : true
+			closable : false,
+			minimizable : false,
+			maximizable : false,
+			collapsible : false,
+			resizable : false,
+			modal : true,
+			shadow : true,
+			buttons : [ {
+				text : 'login',
+				handler : function() {
+					$.ajax({
+						type : "post",
+						url : "${ctx}/login/doLogin",
+						data : $('#loginForm').serialize(),
+						cache : false,
+						datatype : 'json',
+						success : function() {
+						}
+					});
+				}
+			} ]
+
 		});
 	});
 </script>
 </head>
 <body>
 	<div id="loginDiv">
-		<form action="${ctx}/login/doLogin" method="post">
+		<form id="loginForm" action="${ctx}/login/doLogin" method="post">
 			<table>
 				<tr>
 					<td>UserName</td>
@@ -31,10 +50,6 @@
 				<tr>
 					<td>Password</td>
 					<td><input type="password" id="password" name="password" /></td>
-				</tr>
-				<tr>
-					<td />
-					<td><input type="submit" value="login" /></td>
 				</tr>
 			</table>
 		</form>

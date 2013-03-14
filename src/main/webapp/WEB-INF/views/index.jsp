@@ -8,7 +8,6 @@
 <%@ include file="common/global.jsp"%>
 <%@ include file="common/meta.jsp"%>
 <title>Index</title>
-<script src="${ctx }/javascript/common/jquery-1.9.1.js" type="text/javascript"></script>
 <script src="${ctx }/javascript/index.js" type="text/javascript"></script>
 </head>
 <body>
