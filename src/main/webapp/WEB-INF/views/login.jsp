@@ -29,7 +29,13 @@
 						data : $('#loginForm').serialize(),
 						cache : false,
 						datatype : 'json',
-						success : function() {
+						success : function(data) {
+							data = eval(data);
+							if (data.success) {
+								window.location = $('#originURI').val();
+							}else{
+								alert("用户名或密码错误");
+							}
 						}
 					});
 				}
@@ -42,6 +48,8 @@
 <body>
 	<div id="loginDiv">
 		<form id="loginForm" action="${ctx}/login/doLogin" method="post">
+			<input type="hidden" id="originURI" name="originURI"
+				value="${param.originURI }">
 			<table>
 				<tr>
 					<td>UserName</td>

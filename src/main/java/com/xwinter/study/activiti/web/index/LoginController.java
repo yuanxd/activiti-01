@@ -1,20 +1,26 @@
 package com.xwinter.study.activiti.web.index;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import org.activiti.engine.impl.util.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.xwinter.study.activiti.common.Constants;
+import com.xwinter.study.activiti.common.GlobalData;
 import com.xwinter.study.activiti.entity.identity.Role;
 import com.xwinter.study.activiti.entity.identity.User;
 import com.xwinter.study.activiti.service.identity.RoleService;
 import com.xwinter.study.activiti.service.identity.UserService;
+import com.xwinter.study.activiti.web.BaseController;
 
 /**
  * 登录Controller
@@ -24,7 +30,7 @@ import com.xwinter.study.activiti.service.identity.UserService;
  */
 @Controller
 @RequestMapping(value = "/login")
-public class LoginController {
+public class LoginController extends BaseController {
 	/** 用户服务 */
 	@Autowired
 	private UserService userService;
@@ -111,16 +117,21 @@ public class LoginController {
 	 * @param session
 	 *            HttpSession
 	 * @return
+	 * @throws JSONException
 	 */
 	@RequestMapping(value = "/doLogin")
-	public String doLogin(User userTemp, HttpSession session) {
+	@ResponseBody
+	public Map<String, Object> doLogin(User userTemp, HttpSession session) {
+		Map<String, Object> resMap = new HashMap<String, Object>();
 		User user = userService.getByCode(userTemp.getCode());
 		if (null != user) {
 			if (user.getPassword().equals(userTemp.getPassword())) {
-				session.setAttribute(Constants.SESSION_KEY, user);
-				return "redirect:/index";
+				session.setAttribute(GlobalData.USER_SESSION_KEY, user);
+				resMap.put("success", true);
+				return resMap;
 			}
 		}
-		return "/login";
+		resMap.put("success", false);
+		return resMap;
 	}
 }

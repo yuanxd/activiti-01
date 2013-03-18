@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.xwinter.study.activiti.common.Constants;
+import com.xwinter.study.activiti.common.GlobalData;
 import com.xwinter.study.activiti.entity.Leave;
 import com.xwinter.study.activiti.entity.identity.Role;
 import com.xwinter.study.activiti.entity.identity.User;
@@ -41,7 +41,7 @@ public class MainController {
 		Map<String, Object> variables = new HashMap<String, Object>();
 		Role role = roleService.getByName("leader");
 		variables.put("approveRole", role.getId());
-		User user = (User) session.getAttribute(Constants.SESSION_KEY);
+		User user = (User) session.getAttribute(GlobalData.USER_SESSION_KEY);
 		mainService.create(test, variables, user.getId());
 		return "/index";
 	}

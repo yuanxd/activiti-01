@@ -21,6 +21,7 @@ import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 
 import com.xwinter.study.activiti.common.Constants;
+import com.xwinter.study.activiti.common.GlobalData;
 import com.xwinter.study.activiti.service.workflow.WorkflowService;
 import com.xwinter.study.activiti.web.form.workflow.TaskTodoForm;
 
@@ -129,7 +130,7 @@ public class WorkflowServiceImpl implements WorkflowService {
 		// 结果集
 		List<TaskTodoForm> result = new ArrayList<TaskTodoForm>();
 		// 时间格式化
-		SimpleDateFormat sdf = new SimpleDateFormat(Constants.FORMAT_DATE);
+		SimpleDateFormat sdf = new SimpleDateFormat(GlobalData.FORMAT_DATE);
 		// 已经签收的任务
 		List<Task> todoList = taskService.createTaskQuery()
 				.taskAssignee(userid).active().list();
