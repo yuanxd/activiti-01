@@ -42,10 +42,6 @@
 			<param-name>home_uri</param-name>
 			<param-value>/home</param-value>
 		</init-param>
-		<init-param>
-			<param-name>pwd_change_uri</param-name>
-			<param-value>/ChangePwd.action</param-value>
-		</init-param>
 	</filter>
 	<filter-mapping>
 		<filter-name>LoginFilter</filter-name>
@@ -95,6 +91,6 @@
 		<session-timeout>30</session-timeout>
 	</session-config>
 	<welcome-file-list>
-		<welcome-file>index</welcome-file>
+		<welcome-file>home</welcome-file>
 	</welcome-file-list>
 </web-app>

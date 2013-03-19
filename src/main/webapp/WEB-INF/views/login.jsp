@@ -32,7 +32,7 @@
 						success : function(data) {
 							data = eval(data);
 							if (data.success) {
-								window.location = $('#originURI').val();
+								window.location = data.originURI;
 							}else{
 								alert("用户名或密码错误");
 							}

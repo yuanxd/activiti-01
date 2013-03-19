@@ -17,7 +17,7 @@
 	<mvc:default-servlet-handler />
 
 	<!-- 定义首页 -->
-	<mvc:view-controller path="/" view-name="redirect:/index/" />
+	<mvc:view-controller path="/" view-name="redirect:/home" />
 
 	<!-- 定义JSP -->
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">

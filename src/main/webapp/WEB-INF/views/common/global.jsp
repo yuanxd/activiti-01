@@ -20,7 +20,7 @@
     }
 </script>
 <script type="text/javascript"
-	src="${ctx}/javascript/easyui/jquery-1.8.0.min.js"></script>
+	src="${ctx}/javascript/common/jquery-1.9.1.js"></script>
 <script type="text/javascript"
 	src="${ctx}/javascript/easyui/jquery.easyui.min.js"></script>
 <link href="${ctx}/javascript/easyui/themes/default/easyui.css"

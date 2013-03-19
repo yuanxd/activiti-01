@@ -12,10 +12,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.xwinter.study.activiti.common.Constants;
 import com.xwinter.study.activiti.common.GlobalData;
+import com.xwinter.study.activiti.common.Utils;
 import com.xwinter.study.activiti.entity.identity.Role;
 import com.xwinter.study.activiti.entity.identity.User;
 import com.xwinter.study.activiti.service.identity.RoleService;
@@ -108,7 +109,7 @@ public class LoginController extends BaseController {
 	public String login() {
 		return "/login";
 	}
-
+	
 	/**
 	 * 登录验证
 	 * 
@@ -121,8 +122,12 @@ public class LoginController extends BaseController {
 	 */
 	@RequestMapping(value = "/doLogin")
 	@ResponseBody
-	public Map<String, Object> doLogin(User userTemp, HttpSession session) {
+	public Map<String, Object> doLogin(User userTemp,@RequestParam String originURI, HttpSession session) {
 		Map<String, Object> resMap = new HashMap<String, Object>();
+		if(Utils.isEmpty(originURI)) {
+			originURI = GlobalData.getHomePage();
+		}
+		resMap.put("originURI", originURI);
 		User user = userService.getByCode(userTemp.getCode());
 		if (null != user) {
 			if (user.getPassword().equals(userTemp.getPassword())) {

@@ -33,6 +33,14 @@ public class LoginFilter implements Filter {
 		String login_page = filterConfig.getInitParameter(LOGIN_URI);
 		// 首页
 		String home_page = filterConfig.getInitParameter(HOME_URI);
+		String contextPath = filterConfig.getServletContext().getContextPath();
+		if (!login_page.startsWith(contextPath)) {
+			login_page = contextPath + login_page;
+		}
+		if (!home_page.startsWith(contextPath)) {
+			home_page = contextPath + home_page;
+		}
+
 		Assert.notNull(login_page, "login page not set!");
 		if (StringUtils.hasLength(login_page)) {
 			Utils.setField(null, login_page, "loginPage", GlobalData.class);
@@ -99,8 +107,8 @@ public class LoginFilter implements Filter {
 		}
 		httpReq.setAttribute("originURI", request_uri);
 		// 将用户请求转发给登录页面
-		String url = httpReq.getContextPath() + GlobalData.getLoginPage()
-				+ "?originURI=" + URLEncoder.encode(request_uri, "gb2312");
+		String url = GlobalData.getLoginPage() + "?originURI="
+				+ URLEncoder.encode(request_uri, "gb2312");
 		httpResp.sendRedirect(url);
 	}
 
