@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 import org.activiti.engine.impl.util.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -106,7 +107,9 @@ public class LoginController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping(method = RequestMethod.GET)
-	public String login() {
+	public String login(Model model) {
+		model.addAttribute("code", "yxd");
+		model.addAttribute("password", "yxd");
 		return "/login";
 	}
 	

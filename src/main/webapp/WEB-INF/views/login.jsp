@@ -9,43 +9,44 @@
 <%@ include file="common/global.jsp"%>
 <%@ include file="common/meta.jsp"%>
 <title>登录</title>
-<script type="text/javascript">
-	$(function() {
-		$('#loginDiv').dialog({
-			title : 'login',
-			closable : false,
-			minimizable : false,
-			maximizable : false,
-			collapsible : false,
-			resizable : false,
-			modal : true,
-			shadow : true,
-			buttons : [ {
-				text : 'login',
-				handler : function() {
-					$.ajax({
-						type : "post",
-						url : "${ctx}/login/doLogin",
-						data : $('#loginForm').serialize(),
-						cache : false,
-						datatype : 'json',
-						success : function(data) {
-							data = eval(data);
-							if (data.success) {
-								window.location = data.originURI;
-							}else{
-								alert("用户名或密码错误");
-							}
-						}
-					});
-				}
-			} ]
 
-		});
-	});
-</script>
 </head>
 <body>
+<script type="text/javascript">
+    $(function() {
+        $('#loginDiv').dialog({
+            title : 'login',
+            closable : false,
+            minimizable : false,
+            maximizable : false,
+            collapsible : false,
+            resizable : false,
+            modal : true,
+            shadow : true,
+            buttons : [ {
+                text : 'login',
+                handler : function() {
+                    $.ajax({
+                        type : "post",
+                        url : "${ctx}/login/doLogin",
+                        data : $('#loginForm').serialize(),
+                        cache : false,
+                        datatype : 'json',
+                        success : function(data) {
+                            data = eval(data);
+                            if (data.success) {
+                                window.location = data.originURI;
+                            }else{
+                                alert("用户名或密码错误");
+                            }
+                        }
+                    });
+                }
+            } ]
+
+        });
+    });
+</script>
 	<div id="loginDiv">
 		<form id="loginForm" action="${ctx}/login/doLogin" method="post">
 			<input type="hidden" id="originURI" name="originURI"
@@ -53,11 +54,11 @@
 			<table>
 				<tr>
 					<td>UserName</td>
-					<td><input type="text" id="code" name="code" /></td>
+					<td><input type="text" id="code" name="code" value="${code }" /></td>
 				</tr>
 				<tr>
 					<td>Password</td>
-					<td><input type="password" id="password" name="password" /></td>
+					<td><input type="password" id="password" name="password" value="${password }" /></td>
 				</tr>
 			</table>
 		</form>

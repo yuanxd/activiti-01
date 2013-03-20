@@ -1,24 +1,4 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<c:set var="ctx" value="${pageContext.request.contextPath}" />
-<script type="text/javascript">
-	var ctx = '<%=request.getContextPath()%>';
-    function alertObj(obj) {
-        if (typeof obj == 'object') {
-            var text = "";
-            for (var i in obj) {
-                if (text.length > 1000) {
-                    if (!window.confirm(text))
-                        return;
-                    text = "";
-                }
-                text += i + ":" + obj[i] + "\n";
-            }
-            if (text)
-                window.confirm(text);
-        } else 
-            alert((typeof obj)+","+obj);
-    }
-</script>
+<%@include file="common.jsp"%>
 <script type="text/javascript"
 	src="${ctx}/javascript/common/jquery-1.9.1.js"></script>
 <script type="text/javascript"
@@ -27,3 +7,17 @@
 	rel="stylesheet" type="text/css" />
 <link href="${ctx}/javascript/easyui/themes/icon.css" rel="stylesheet"
 	type="text/css" />
+<script type="text/javascript">
+	/** 回收内存 */
+	$.fn.panel.defaults.onBeforeDestroy = function() {
+		var frame = $('iframe', this);
+		if (frame.length > 0) {
+			frame[0].contentWindow.document.write('');
+			frame[0].contentWindow.close();
+			frame.remove();
+			if ($.browser.msie) {
+				CollectGarbage();
+			}
+		}
+	};
+</script>
