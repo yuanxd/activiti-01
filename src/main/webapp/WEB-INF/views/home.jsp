@@ -13,12 +13,14 @@
 <body class="easyui-layout">
 	<div region="west" split="true" title="导航" style="width: 250px;">
 		<div class="easyui-accordion" fit=true>
-			<div title="功能菜单" data-options="selected:true"
-				style="overflow: auto; padding: 5px;">
-				<ul id="functionTree"></ul>
+			<div title="功能菜单" data-options="selected:true" style="overflow: auto; padding: 5px;">
+				<ul id="functionTree" class="ztree"
+					style="width: 260px; overflow: auto;"></ul>
 			</div>
-			<div title="系统配置" style="overflow: auto; padding: 5px;">
-				<ul id="systemConfigTree"></ul>
+			<div title="系统配置" 
+				style="overflow: auto; padding: 5px;">
+				<ul id="systemConfigTree" class="ztree"
+					style="width: 260px; overflow: auto;"></ul>
 			</div>
 		</div>
 	</div>

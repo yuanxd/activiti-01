@@ -1,74 +1,58 @@
 $(function() {
-	// 功能菜单，使用iframe创建画面
-	var funTreeData = [ {
-		text : "测试",
-		children : [ {
-			text : "Jcrop",
-			attributes : {
-				url : ctx + "/test/jcrop"
+	var setting = {
+		view : {
+			showLine : false
+		},
+		data : {
+			simpleData : {
+				enable : true
 			}
-		}, {
-			text : "一级菜单2",
-			attributes : {
-				url : ""
-			}
-		}, {
-			text : "一级菜单3",
-			state : "closed",
-			children : [ {
-				text : "二级菜单1",
-				attributes : {
-					url : ""
-				}
-			}, {
-				text : "二级菜单2",
-				attributes : {
-					url : ""
-				}
-			}, {
-				text : "二级菜单3",
-				attributes : {
-					url : ""
-				}
-			} ]
-		} ]
-	}, {
-		text : "测试",
-	} ];
-	// 系统配置菜单数据，不使用iframe创建画面
-	var sysconfgTreeData = [ {
-		text : "菜单管理",
-		attributes : {
-			url : ctx + "/system/menu"
+		},
+		callback : {
+			onClick : onClick
 		}
+	};
+	/** 功能菜单数据 */
+	var functionTreeNodes = [ {
+		id : 1,
+		pId : 0,
+		name : "测试",
+		open : true
 	}, {
-		text : "用户管理"
-	}, {
-		text : "角色管理"
-	}, {
-		text : "组织管理"
+		id : 2,
+		pId : 1,
+		name : "Jcrop",
+		attributes : {
+			url : ctx + "/test/jcrop"
+		}
+	} ];
+	var systemConfigTreeNodes = [ {
+		id : 1,
+		pId : 0,
+		name : "菜单配置",
+		open : true
 	} ];
 
-	// 实例化树形菜单
-	$("#functionTree").tree({
-		data : funTreeData,
-		lines : true,
-		onClick : function(node) {
-			if (node.attributes) {
-				open(node.text, node.attributes.url);
-			}
+	function onClick(event, treeId, treeNode, clickFlag) {
+		if ($("#tabs").tabs('exists', treeNode.name)) {
+			$('#tabs').tabs('select', treeNode.name);
+		} else {
+			$('#tabs')
+					.tabs(
+							'add',
+							{
+								title : treeNode.name,
+								closable : true,
+								content : '<iframe width="100%" height="100%" frameborder="0" src='
+										+ treeNode.attributes.url
+										+ ' style="width:100%;height:100%;"></iframe>'
+							});
 		}
-	});
-	// 实例化树形菜单
-	$("#systemConfigTree").tree({
-		data : sysconfgTreeData,
-		lines : true,
-		onClick : function(node) {
-			if (node.attributes) {
-				open(node.text, node.attributes.url, node.attributes.iframe);
-			}
-		}
-	});
+
+	}
+	$.fn.zTree.init($("#functionTree"), setting, functionTreeNodes);
+
+	$.fn.zTree.init($("#systemConfigTree"), setting, systemConfigTreeNodes);
 	// 在右边center区域打开菜单，新增tab
 	function open(text, url, useIframe) {
 		if ($("#tabs").tabs('exists', text)) {
