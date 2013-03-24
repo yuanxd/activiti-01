@@ -5,7 +5,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.xwinter.study.activiti.service.leave.LeaveService;
-import com.xwinter.study.activiti.web.form.workflow.WorkFlowForm;
 
 @Controller
 @RequestMapping(value = "/leave")

@@ -22,6 +22,10 @@
 		<param-name>log4jRefreshInterval</param-name>
 		<param-value>3000</param-value>
 	</context-param>
+	<context-param>
+		<param-name>accessBasePackage</param-name>
+		<param-value>com.xwinter.study.activiti</param-value>
+	</context-param>
 	<listener>
 		<listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
 	</listener>
