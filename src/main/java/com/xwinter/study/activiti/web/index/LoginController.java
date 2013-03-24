@@ -23,6 +23,7 @@ import com.xwinter.study.activiti.entity.identity.User;
 import com.xwinter.study.activiti.service.identity.RoleService;
 import com.xwinter.study.activiti.service.identity.UserService;
 import com.xwinter.study.activiti.web.BaseController;
+import com.xwinter.study.annotation.Access;
 
 /**
  * 登录Controller
@@ -32,6 +33,7 @@ import com.xwinter.study.activiti.web.BaseController;
  */
 @Controller
 @RequestMapping(value = "/login")
+@Access(name="登陆",code="login")
 public class LoginController extends BaseController {
 	/** 用户服务 */
 	@Autowired
@@ -107,6 +109,7 @@ public class LoginController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping(method = RequestMethod.GET)
+	@Access(name="登陆",code="getLogin")
 	public String login(Model model) {
 		model.addAttribute("code", "yxd");
 		model.addAttribute("password", "yxd");
@@ -125,6 +128,7 @@ public class LoginController extends BaseController {
 	 */
 	@RequestMapping(value = "/doLogin")
 	@ResponseBody
+	@Access(name="登陆",code="doLogin")
 	public Map<String, Object> doLogin(User userTemp,@RequestParam String originURI, HttpSession session) {
 		Map<String, Object> resMap = new HashMap<String, Object>();
 		if(Utils.isEmpty(originURI)) {
