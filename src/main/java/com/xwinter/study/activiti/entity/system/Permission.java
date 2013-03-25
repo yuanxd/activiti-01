@@ -31,7 +31,7 @@ public class Permission extends BaseEntity {
 	/** 下级列表 */
 	private Collection<Permission> children;
 
-	@OneToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE }, mappedBy = "parent", targetEntity = Permission.class)
+	@OneToMany(cascade = { CascadeType.REMOVE, CascadeType.MERGE }, mappedBy = "parent", targetEntity = Permission.class)
 	public Collection<Permission> getChildren() {
 		return children;
 	}

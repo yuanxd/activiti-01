@@ -9,12 +9,12 @@ import com.xwinter.study.activiti.service.BaseService;
 
 public abstract class BaseServiceImpl<E extends BaseEntity, PK extends Serializable>
 		implements BaseService<E, PK> {
-	
+
 	public abstract BaseDAO<E, PK> getBaseDAO();
 
 	@Override
-	public PK save(E entity) {
-		return getBaseDAO().save(entity);
+	public void save(E entity) {
+		getBaseDAO().saveOrUpdate(entity);
 	}
 
 	@Override
@@ -25,5 +25,13 @@ public abstract class BaseServiceImpl<E extends BaseEntity, PK extends Serializa
 	@Override
 	public E get(PK id) {
 		return getBaseDAO().get(id);
+	}
+	@Override
+	public void delete(PK id) {
+		getBaseDAO().delete(id);
+	}
+	@Override
+	public void delete(E entity) {
+		getBaseDAO().delete(entity);
 	}
 }

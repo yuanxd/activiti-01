@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.xwinter.study.access.Page;
 import com.xwinter.study.access.PermissionManager;
+import com.xwinter.study.activiti.common.Utils;
 import com.xwinter.study.activiti.entity.system.Permission;
 import com.xwinter.study.activiti.service.system.PermissionService;
 import com.xwinter.study.activiti.web.BaseController;
@@ -90,18 +91,33 @@ public class MenuController extends BaseController {
 	 */
 	@RequestMapping(value = "/savePage")
 	@ResponseBody
-	public String savePage(Page page, String pid) {
-		Permission p = new Permission();
+	public String savePage(Page page) {
+		Permission p = null;
+		// 新增模式
+		if (Utils.isEmpty(page.getId())) {
+			p = new Permission();
+			if (null != page.getPid() && page.getPid().length() > 0) {
+				Permission pp = permissionService.get(page.getPid());
+				if (null != pp) {
+					p.setParent(pp);
+				}
+			}
+		} else {
+			p = permissionService.get(page.getId());
+		}
 		p.setCode(page.getCode());
 		p.setName(page.getName());
-		if (null != pid && pid.length() > 0) {
-			Permission pp = permissionService.get(pid);
-			if (null != pp) {
-				p.setParent(pp);
-			}
-		}
 		permissionService.save(p);
 		PermissionManager.getInstance().usePage(p.getCode());
 		return "sucess";
+	}
+
+	@RequestMapping(value = "/deletePage")
+	@ResponseBody
+	public String deletePage(Page page) {
+		if (!Utils.isEmpty(page.getId())) {
+			permissionService.delete(page.getId());
+		}
+		return "success";
 	}
 }
