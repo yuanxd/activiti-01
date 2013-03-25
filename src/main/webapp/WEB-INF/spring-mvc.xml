@@ -22,7 +22,12 @@
 	<!-- 定义首页 -->
 	<mvc:view-controller path="/" view-name="redirect:/home" />
 	<mvc:interceptors>
-		<bean class="com.xwinter.study.access.AccessInterceptor" />
+		<bean class="com.xwinter.study.access.AccessInterceptor">
+			<property name="permissionCheck">
+				<ref bean="testPermissionCheck" />
+			</property>
+			<property name="sessionKey" value="_USER_SESSION_KEY" />
+		</bean>
 	</mvc:interceptors>
 	<!-- 定义JSP -->
 	<bean

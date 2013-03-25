@@ -8,3 +8,7 @@ drop table T_ACTIVITI_USER if exists;
 drop table T_ACTIVITI_USER_ROLE if exists;
 drop table T_ACTIVITI_LEAVE if exists;
 drop table T_ACTIVITI_DEPARTMENT if exists;
+
+alter table T_SYSTEM_PERMISSION drop constraint FK_T_SYSTEM_PERMISSION;
+
+drop table T_SYSTEM_PERMISSION if exists;

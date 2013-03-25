@@ -12,9 +12,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.xwinter.study.activiti.common.OperateImage;
 import com.xwinter.study.activiti.common.Utils;
 import com.xwinter.study.activiti.web.BaseController;
+import com.xwinter.study.annotation.AccessFunc;
+import com.xwinter.study.annotation.AccessPage;
 
 @Controller
 @RequestMapping(value = "/test/jcrop")
+@AccessPage
 public class JcropTestController extends BaseController {
 	/**
 	 * 首页画面

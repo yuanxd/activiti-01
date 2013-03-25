@@ -12,16 +12,39 @@
 	src="${ctx}/javascript/jcrop/jquery.Jcrop.js"></script>
 <link rel="stylesheet" href="${ctx}/javascript/jcrop/jquery.Jcrop.css"
 	type="text/css" />
-<script language="Javascript">
-	
-</script>
+<script type="text/javascript" src="${ctx}/javascript/system/menu.js"></script>
 </head>
 <body class="easyui-layout">
-	<div region="west" split="true" title="导航" style="width: 250px;">
+	<div region="west" split="true" title="菜单功能" style="width: 250px;"
+		data-options="tools:'#tt'">
+		<ul id="functions" class="ztree" style="width: 260px; overflow: auto;"></ul>
 	</div>
-	<div region="center" id="content"></div>
-	<div region="north" style="height: 30px">Test</div>
-	<div region="south" border="false" style="height: 20px;">south
-		region</div>
+	<div region="center" id="content">
+		<form id="detailForm" method="post">
+			<input type="hidden" name="pid" id="pid">
+			<input type="hidden" name="id" id="id">
+			<div>
+				<label for="name">名称:</label> <input class="easyui-validatebox"
+					type="text" id="name" name="name" data-options="required:true"></input>
+			</div>
+			<div>
+				<label for="code">代码: <input class="easyui-combobox"
+					id="code" name="code" id="code">
+			</div>
+		</form>
+	</div>
+	<div region="north" style="height: 35px">
+		<div class="toolbar" style="margin: 3px 0;">
+			<a id="addBtn" name="addBtn" href="#" class="easyui-linkbutton"
+				data-options="iconCls:'icon-add'">新增下级</a> 
+			<a id="saveBtn" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-save'">保存</a>
+			<a id="deleteBtn" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-remove'">删除</a>
+		</div>
+	</div>
+	<div id="tt">
+		<a href="javascript:void(0)" class="icon-reload"
+			onclick="reloadTree()"></a>
+	</div>
+
 </body>
 </html>

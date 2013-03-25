@@ -1,6 +1,6 @@
 <%@include file="common.jsp"%>
 <script type="text/javascript"
-	src="${ctx}/javascript/common/jquery-1.9.1.js"></script>
+	src="${ctx}/javascript/easyui/jquery-1.8.0.min.js"></script>
 <script type="text/javascript"
 	src="${ctx}/javascript/easyui/jquery.easyui.min.js"></script>
 <script type="text/javascript"
@@ -14,7 +14,6 @@
 <link href="${ctx}/javascript/ztree/zTreeStyle.css" rel="stylesheet"
 	type="text/css" />
 <script type="text/javascript">
-	/** 回收内存
 	$.fn.panel.defaults.onBeforeDestroy = function() {
 		var frame = $('iframe', this);
 		if (frame.length > 0) {
@@ -26,5 +25,4 @@
 			}
 		}
 	};
-	 */
 </script>

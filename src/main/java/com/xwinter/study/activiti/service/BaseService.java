@@ -23,7 +23,7 @@ public interface BaseService<E extends BaseEntity, PK extends Serializable> {
 	 *            实体
 	 * @return 主键
 	 */
-	public PK save(E entity);
+	public void save(E entity);
 
 	/**
 	 * 批量保存实体
@@ -42,4 +42,7 @@ public interface BaseService<E extends BaseEntity, PK extends Serializable> {
 	 * @return 实体
 	 */
 	public E get(PK id);
+
+	public void delete(PK id);
+	public void delete(E entity);
 }
