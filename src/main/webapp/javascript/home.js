@@ -31,6 +31,10 @@ $(function() {
 		pId : 0,
 		name : "菜单配置",
 		open : true
+		,
+		attributes : {
+			url : ctx + "/system/menu"
+		}
 	} ];
 
 	function onClick(event, treeId, treeNode, clickFlag) {

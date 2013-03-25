@@ -7,11 +7,12 @@ import com.xwinter.study.access.Function;
 
 @Component
 public class TestPermissionCheck implements AccessPermissionCheck {
+	public final static String PAGE_UNAUTHORISED = "/login";
 
 	@Override
-	public boolean checkPermission(Function func, Object sessionKey) {
+	public String checkPermission(Function func, Object sessionKey) {
 		System.err.println(func.toString());
-		return false;
+		return PAGE_UNAUTHORISED;
 	}
 
 }
