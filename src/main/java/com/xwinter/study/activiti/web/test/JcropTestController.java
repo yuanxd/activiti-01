@@ -17,7 +17,7 @@ import com.xwinter.study.annotation.AccessPage;
 
 @Controller
 @RequestMapping(value = "/test/jcrop")
-@AccessPage
+@AccessPage(url = "/test/jcrop")
 public class JcropTestController extends BaseController {
 	/**
 	 * 首页画面
@@ -33,6 +33,7 @@ public class JcropTestController extends BaseController {
 	 * 返回裁剪后的图片
 	 */
 	@RequestMapping("crop")
+	@AccessFunc()
 	public void getCropImage(OperateImage omg, HttpServletRequest request,
 			HttpServletResponse response) throws IOException {
 		String path = omg.getSrcpath();

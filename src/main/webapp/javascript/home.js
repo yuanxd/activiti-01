@@ -1,43 +1,34 @@
 $(function() {
 	var setting = {
 		view : {
-			showLine : false
-		},
-		data : {
-			simpleData : {
-				enable : true
-			}
+			selectedMulti : false
 		},
 		callback : {
+			onAsyncSuccess : zTreeOnAsyncSuccess,
 			onClick : onClick
+		},
+		async : {
+			enable : true,
+			url : ctx + "/system/menu/getNodes",
+			autoParam : [ "id", "name=name" ],
+			dataFilter : filter
 		}
 	};
-	/** 功能菜单数据 */
-	var functionTreeNodes = [ {
-		id : 1,
-		pId : 0,
-		name : "测试",
-		open : true
-	}, {
-		id : 2,
-		pId : 1,
-		name : "Jcrop",
-		attributes : {
-			url : ctx + "/test/jcrop"
-		}
-	} ];
 	var systemConfigTreeNodes = [ {
 		id : 1,
 		pId : 0,
 		name : "菜单配置",
-		open : true
-		,
+		open : true,
 		attributes : {
 			url : ctx + "/system/menu"
 		}
 	} ];
 
 	function onClick(event, treeId, treeNode, clickFlag) {
+		var zTree = $.fn.zTree.getZTreeObj("functionTree");
+		zTree.expandNode(treeNode);
+		if (!treeNode.link)
+			return;
 		if ($("#tabs").tabs('exists', treeNode.name)) {
 			$('#tabs').tabs('select', treeNode.name);
 		} else {
@@ -48,13 +39,14 @@ $(function() {
 								title : treeNode.name,
 								closable : true,
 								content : '<iframe width="100%" height="100%" frameborder="0" src='
-										+ treeNode.attributes.url
+										+ ctx
+										+ treeNode.link
 										+ ' style="width:100%;height:100%;"></iframe>'
 							});
 		}
 
 	}
-	$.fn.zTree.init($("#functionTree"), setting, functionTreeNodes);
+	$.fn.zTree.init($("#functionTree"), setting);
 
 	$.fn.zTree.init($("#systemConfigTree"), setting, systemConfigTreeNodes);
 	// 在右边center区域打开菜单，新增tab
@@ -120,3 +112,35 @@ $(function() {
 		}
 	}
 });
+/**
+ * 查询成功后设置节点选中
+ */
+function zTreeOnAsyncSuccess(event, treeId, treeNode, msg) {
+	var treeObj = $.fn.zTree.getZTreeObj("functionTree");
+	var nodes = treeObj.getSelectedNodes();
+	if (!nodes || nodes.length == 0) {
+		nodes = treeObj.getNodes();
+		if (nodes && nodes.length > 0) {
+			treeObj.selectNode(nodes[0]);
+		} else {
+			$('#detailForm').form('clear');
+		}
+	}
+}
+/**
+ * 树图过滤
+ * 
+ * @param treeId
+ * @param parentNode
+ * @param childNodes
+ * @returns
+ */
+function filter(treeId, parentNode, childNodes) {
+	if (!childNodes)
+		return null;
+	for ( var i = 0, l = childNodes.length; i < l; i++) {
+		childNodes[i].name = childNodes[i].name.replace(/\.n/g, '.');
+		childNodes[i].isParent = childNodes[i].folder;
+	}
+	return childNodes;
+}

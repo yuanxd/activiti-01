@@ -3,6 +3,25 @@ package com.xwinter.study.activiti.web.form;
 public class Node {
 	private String id;
 	private String name;
+	/** url属性冲突 */
+	private String link;
+	private int status;
+
+	public int getStatus() {
+		return status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
+	}
+
+	public String getLink() {
+		return link;
+	}
+
+	public void setLink(String link) {
+		this.link = link;
+	}
 
 	private boolean folder = true;
 

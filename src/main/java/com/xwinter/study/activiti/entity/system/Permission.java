@@ -28,6 +28,10 @@ public class Permission extends BaseEntity {
 	private boolean folder;
 	/** 上级功能 */
 	private Permission parent;
+	/** 功能链接 */
+	private String url;
+	/** 菜单状态 */
+	private int status;
 	/** 下级列表 */
 	private Collection<Permission> children;
 
@@ -49,6 +53,20 @@ public class Permission extends BaseEntity {
 
 	public String getName() {
 		return name;
+	}
+
+	@ManyToOne()
+	@JoinColumn(name = "pid")
+	public Permission getParent() {
+		return parent;
+	}
+
+	public int getStatus() {
+		return status;
+	}
+
+	public String getUrl() {
+		return url;
 	}
 
 	public boolean isFolder() {
@@ -75,13 +93,15 @@ public class Permission extends BaseEntity {
 		this.name = name;
 	}
 
-	@ManyToOne()
-	@JoinColumn(name = "pid")
-	public Permission getParent() {
-		return parent;
-	}
-
 	public void setParent(Permission parent) {
 		this.parent = parent;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
 	}
 }
