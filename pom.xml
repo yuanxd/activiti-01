@@ -142,11 +142,13 @@
 			<artifactId>cglib</artifactId>
 			<version>2.2.2</version>
 		</dependency>
+		<!-- 
 		<dependency>
 			<groupId>com.xwinter.study</groupId>
 			<artifactId>access</artifactId>
 			<version>0.1</version>
 		</dependency>
+		 -->
 	</dependencies>
 	<build>
 		<finalName>activiti-01</finalName>
@@ -182,6 +184,17 @@
 			</plugin>
 		</plugins>
 	</build>
+	<repositories>
+		<repository>
+			<id>Alfresco</id>
+			<name>Alfresco Maven Repository</name>
+			<layout>default</layout>
+			<url>https://maven.alfresco.com/nexus/content/groups/public/</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
 	<profiles>
 		<!-- 开发环境 <profile> <id>kft-activiti-demo</id> <activation> <activeByDefault>true</activeByDefault> 
 			</activation> <build> <resources> <resource> <directory>src/main/resources</directory> 

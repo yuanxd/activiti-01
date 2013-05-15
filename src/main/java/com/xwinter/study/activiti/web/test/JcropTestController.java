@@ -12,12 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.xwinter.study.activiti.common.OperateImage;
 import com.xwinter.study.activiti.common.Utils;
 import com.xwinter.study.activiti.web.BaseController;
-import com.xwinter.study.annotation.AccessFunc;
-import com.xwinter.study.annotation.AccessPage;
 
 @Controller
 @RequestMapping(value = "/test/jcrop")
-@AccessPage(url = "/test/jcrop")
 public class JcropTestController extends BaseController {
 	/**
 	 * 首页画面
@@ -33,7 +30,6 @@ public class JcropTestController extends BaseController {
 	 * 返回裁剪后的图片
 	 */
 	@RequestMapping("crop")
-	@AccessFunc()
 	public void getCropImage(OperateImage omg, HttpServletRequest request,
 			HttpServletResponse response) throws IOException {
 		String path = omg.getSrcpath();
