@@ -34,10 +34,11 @@
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
-	<!-- 权限控制 -->
+	<!-- 权限控制 
 	<listener>
 		<listener-class>com.xwinter.study.access.AccessListener</listener-class>
 	</listener>
+	-->
 	<!-- login filter -->
 	<filter>
 		<filter-name>LoginFilter</filter-name>
