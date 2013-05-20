@@ -7,17 +7,12 @@
 <%@ include file="../common/global.jsp"%>
 <%@ include file="../common/meta.jsp"%>
 <title>Index</title>
-<script src="${ctx}/javascript/home.js" type="text/javascript"></script>
-<script type="text/javascript"
-	src="${ctx}/javascript/jcrop/jquery.Jcrop.js"></script>
-<link rel="stylesheet" href="${ctx}/javascript/jcrop/jquery.Jcrop.css"
-	type="text/css" />
 <script type="text/javascript" src="${ctx}/javascript/system/menu.js"></script>
 </head>
 <body class="easyui-layout">
 	<div region="west" split="true" title="菜单功能" style="width: 250px;"
 		data-options="tools:'#tt'">
-		<ul id="functions" class="ztree" style="width: 260px; overflow: auto;"></ul>
+		<ul id="menus" class="ztree" style="width: 260px; overflow: auto;"></ul>
 	</div>
 	<div region="center" id="content" style="padding: 10px;">
 		<form id="detailForm" method="post">

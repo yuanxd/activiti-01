@@ -6,48 +6,34 @@ $(function() {
  */
 function init() {
 	/** 初始化树图 */
-	var setting = {
+	$.fn.zTree.init($("#menus"), {
 		view : {
 			selectedMulti : false
 		},
 		callback : {
-			onAsyncSuccess : zTreeOnAsyncSuccess,
+			// onAsyncSuccess : zTreeOnAsyncSuccess,
 			onClick : onClick
 		},
 		async : {
 			enable : true,
 			url : ctx + "/system/menu/getNodes",
-			autoParam : [ "id", "name=name" ],
+			autoParam : [ "id" ],
 			dataFilter : filter
 		}
-	};
-	$.fn.zTree.init($("#functions"), setting);
-
+	});
 	/** 初始化按钮事件 */
 	// 新增同级目录
-	$("#addFolderBtn").click(function() {
-		doAddFolderHandler();
-	});
+	$("#addFolderBtn").click(doAddFolderHandler);
 	// 新增下级目录
-	$("#addSubFolderBtn").click(function() {
-		doAddSubHandler();
-	});
+	$("#addSubFolderBtn").click(doAddSubHandler);
 	// 新增菜单
-	$("#addMenuBtn").click(function() {
-		doAddMenuHandler();
-	});
+	$("#addMenuBtn").click(doAddMenuHandler);
 	// 新增菜单功能
-	$("#addFunBtn").click(function() {
-		doAddFunHandler();
-	});
+	$("#addFunBtn").click(doAddFunHandler);
 	// 保存
-	$("#saveBtn").click(function() {
-		doSaveHandler();
-	});
+	$("#saveBtn").click(doSaveHandler);
 	// 删除
-	$("#deleteBtn").click(function() {
-		doDeleteHandler();
-	});
+	$("#deleteBtn").click(doDeleteHandler);
 }
 /**
  * 新增同级目录处理
@@ -170,8 +156,7 @@ function doDeleteHandler() {
 		dataType : 'json',
 		data : $('#detailForm').serialize(),
 		success : function(data) {
-			$.fn.zTree.getZTreeObj("functions").reAsyncChildNodes(null,
-					"refresh");
+			$.fn.zTree.getZTreeObj("menus").reAsyncChildNodes(null, "refresh");
 		}
 	});
 }
@@ -196,13 +181,15 @@ function doSaveHandler() {
  * 刷新树图
  */
 function reloadTree() {
-	var treeObj = $.fn.zTree.getZTreeObj("functions");
+	var treeObj = $.fn.zTree.getZTreeObj("menus");
 	var nodes = treeObj.getSelectedNodes();
 	var node = null;
 	if (nodes && nodes.length > 0) {
 		node = nodes[0];
+		if ($('#pid').val() != node.id)
+			node = node.getParentNode();
 	}
-	$.fn.zTree.getZTreeObj("functions").reAsyncChildNodes(node, "refresh");
+	$.fn.zTree.getZTreeObj("menus").reAsyncChildNodes(node, "refresh");
 }
 /**
  * 树图过滤
@@ -235,7 +222,7 @@ function filter(treeId, parentNode, childNodes) {
  * @param clickFlag
  */
 function onClick(event, treeId, treeNode, clickFlag) {
-	var zTree = $.fn.zTree.getZTreeObj("functions");
+	var zTree = $.fn.zTree.getZTreeObj("menus");
 	zTree.expandNode(treeNode);
 	loadData(treeNode);
 }
@@ -243,7 +230,7 @@ function onClick(event, treeId, treeNode, clickFlag) {
  * 查询成功后设置节点选中
  */
 function zTreeOnAsyncSuccess(event, treeId, treeNode, msg) {
-	var treeObj = $.fn.zTree.getZTreeObj("functions");
+	var treeObj = $.fn.zTree.getZTreeObj("menus");
 	var nodes = treeObj.getSelectedNodes();
 	if (!nodes || nodes.length == 0) {
 		nodes = treeObj.getNodes();
@@ -285,7 +272,7 @@ function setFormStatus(status) {
  * @returns
  */
 function getSelectTreeNodes() {
-	var treeObj = $.fn.zTree.getZTreeObj("functions");
+	var treeObj = $.fn.zTree.getZTreeObj("menus");
 	return treeObj.getSelectedNodes();
 }
 /**
@@ -308,7 +295,6 @@ function loadData(treeNode) {
 	if (treeNode.getParentNode()) {
 		$('#pid').val(treeNode.getParentNode());
 	}
-	console.info(treeNode);
 	if (treeNode.folder) {
 		setFormStatus('folder');
 	}
